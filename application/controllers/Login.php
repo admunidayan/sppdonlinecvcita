@@ -4,18 +4,18 @@ class Login extends CI_Controller {
 
     function __construct(){
         parent::__construct();
-        $this->load->model('admin/Admin_m');
         $this->load->helper('form');
     }
 
     function index(){
+        $this->load->model('admin/Admin_m');
         if($this->ion_auth->logged_in()){
         //sudah login, redirect ke halaman welcome
         redirect(base_url('index.php/admin/dashboard'));
        }
         //user tidak login, tampilkan halaman login
        $data['title'] = 'log In';
-       $data['brand'] = 'asset/img/lembaga/'.$this->Admin_m->info_pt(1)->logo_pt;
+       $data['infopt'] = $this->Admin_m->info_pt(1);
        $this->load->view('admin/login-v', $data);
    }
    function proses_login(){

@@ -5,7 +5,6 @@ class Users extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->load->model('admin/Admin_m');
-		$this->load->model('admin/Users_m');
 		$this->load->library('resize');
 	}
 	public function index(){
@@ -30,34 +29,7 @@ class Users extends CI_Controller {
 		}else{
 			$pesan = 'Login terlebih dahulu';
 			$this->session->set_flashdata('message', $pesan );
-			redirect(base_url('index.php/login'));
-		}
-	}
-	public function create(){
-		if ($this->ion_auth->logged_in()) {
-			$level = array('admin','members');
-			if (!$this->ion_auth->in_group($level)) {
-				$pesan = 'Anda tidak memiliki Hak untuk Mengakses halaman ini';
-				$this->session->set_flashdata('message', $pesan );
-				redirect(base_url('index.php/admin/dashboard'));
-			}else{
-				$post = $this->input->post();
-				$data['title'] = 'Tambah users';
-				$data['infopt'] = $this->Admin_m->info_pt(1);
-				$data['users'] = $this->ion_auth->user()->row();
-				if ($this->ion_auth->in_group('admin')) {
-					$data['aside'] = 'nav/nav-admin';
-				}else{
-					$data['aside'] = 'nav/nav-members';
-				}
-				$data['groups'] = $this->ion_auth->groups()->result();
-				$data['page'] = 'admin/tambah-users-v';
-				$this->load->view('admin/dashboard-v',$data);
-			}
-		}else{
-			$pesan = 'Login terlebih dahulu';
-			$this->session->set_flashdata('message', $pesan );
-			redirect(base_url('index.php/login'));
+			redirect(base_url('index.php/admin//login'));
 		}
 	}
 	public function proses_create(){
@@ -119,7 +91,7 @@ class Users extends CI_Controller {
 		}else{
 			$pesan = 'Login terlebih dahulu';
 			$this->session->set_flashdata('message', $pesan );
-			redirect(base_url('index.php/login'));
+			redirect(base_url('index.php/admin//login'));
 		}
 	}
 	public function proses_edit(){

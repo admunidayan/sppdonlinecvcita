@@ -6,16 +6,28 @@ class Admin_m extends CI_Model
 		$query = $this->db->get('info_pt');
 		return $query->row();
 	}
+	public function jumlah_data($jk){
+		$this->db->from('data_pegawai');
+		$this->db->where('jenis_kelamin',$jk);
+		$rs = $this->db->count_all_results();
+		return $rs;
+	}
+	public function jumlah_skpd($id){
+		$this->db->from('data_pegawai');
+		$this->db->where('id_satuan_kerja',$id);
+		$rs = $this->db->count_all_results();
+		return $rs;
+	}
+	public function jml_data($table,$field,$id){
+		$this->db->from($table);
+		$this->db->where($field,$id);
+		$rs = $this->db->count_all_results();
+		return $rs;
+	}
 	public function cek_pt($id){
 		$this->db->where('id_info_pt', $id);
 		$query = $this->db->get('info_pt');
 		return $query;
-	}
-	public function cek_barang_laku($menu,$tgl){
-		$this->db->where('id_menu', $menu);
-		$this->db->where('tgl_laku', $tgl);
-		$query = $this->db->get('laku_per_hari');
-		return $query->row();
 	}
 	public function Update_pt($id,$data){
 		$this->db->where('id_info_pt', $id);
@@ -68,123 +80,70 @@ class Admin_m extends CI_Model
 		$this->db->where('id_kategori_link', $id);
 		$this->db->delete('kategori_link');
 	}
+	public function select_data($tabel){
+		$query = $this->db->get($tabel);
+		return $query->result();
+	}
+	public function select_data_order($tabel,$field,$id){
+		$this->db->where($field, $id);
+		$query = $this->db->get($tabel);
+		return $query->result();
+	}
+	public function select_data_s_k(){
+		$this->db->order_by('id_satuan_kerja','asc');
+		$query = $this->db->get('master_satuan_kerja');
+		return $query->result();
+	}
+	public function detail_data_order($tabel,$field,$id){
+		$this->db->where($field, $id);
+		$query = $this->db->get($tabel);
+		return $query->row();
+	}
+	public function detail_data_min($tabel,$field,$fieldorder,$valorder,$id){
+		$this->db->where($field, $id);
+		$this->db->order_by($fieldorder,$valorder);
+		$query = $this->db->get($tabel);
+		return $query->row();
+	}
+	public function riwayat_max($id){
+		$this->db->where('id_pegawai', $id);
+		$this->db->join('master_golongan', 'master_golongan.id_golongan = data_riwayat_pangkat.id_golongan');
+		$this->db->order_by('id_riwayat_pangkat','desc');
+		$query = $this->db->get('data_riwayat_pangkat');
+		return $query->row();
+	}
+	public function jabatan_min($id){
+		$this->db->where('id_pegawai', $id);
+		$this->db->join('master_jabatan', 'master_jabatan.id_jabatan = data_riwayat_jabatan.id_jabatan');
+		$this->db->order_by('id_riwayat_jabatan','asc');
+		$query = $this->db->get('data_riwayat_jabatan');
+		return $query->row();
+	}
+	public function jabatan_max($id){
+		$this->db->where('id_pegawai', $id);
+		$this->db->join('master_jabatan', 'master_jabatan.id_jabatan = data_riwayat_jabatan.id_jabatan');
+		$this->db->order_by('id_riwayat_jabatan','desc');
+		$query = $this->db->get('data_riwayat_jabatan');
+		return $query->row();
+	}
+	function insert_data($tabel,$data){
+		$this->db->insert($tabel, $data);
+	}
+	public function delete_data($tabel,$field,$id){
+		$this->db->where($field, $id);
+		$this->db->delete($tabel);
+	}
+	public function update_data($tabel,$field,$id,$data){
+		$this->db->where($field, $id);
+		$this->db->update($tabel,$data);
+	}
+	public function update($tabel,$field,$id,$data){
+		$this->db->where($field, $id);
+		$this->db->update($tabel,$data);
+	}
 	// 
-	public function select_all_data($table){
-		$query = $this->db->get($table);
-		return $query->result();
-	}
-	public function select_all_data_order($table,$field,$id){
-		$this->db->where($field, $id);
-		$query = $this->db->get($table);
-		return $query->result();
-	}
-	public function select_all_data_bulan($bulan){
-		$this->db->like('kode', $bulan);
-		$query = $this->db->get('tanggal');
-		return $query->result();
-	}
-	public function detail_data($table,$field,$id){
-		$this->db->where($field, $id);
-		$query = $this->db->get($table);
-		return $query->result();
-	}
-	public function select_barang_laku($id){
-		$this->db->select('laku_per_hari.*,menu.id_menu,menu.nama_menu');
-		$this->db->where('tgl_laku',$id);
-		$this->db->join('menu', 'menu.id_menu = laku_per_hari.id_menu');
-		$query = $this->db->get('laku_per_hari');
-		return $query->result();
-	}
-	public function detail_data_order($table,$field,$id){
-		$this->db->where($field, $id);
-		$query = $this->db->get($table);
-		return $query->row();
-	}
-	public function detail_obat($id){
-		$this->db->where('menu.id_menu', $id);
-		$this->db->join('kategori', 'kategori.id_kategori = menu.id_kategori');
-		$query = $this->db->get('menu');
-		return $query->row();
-	}
-	public function detail_data_nota($id){
-		$this->db->where('nota.id_nota', $id);
-		$this->db->join('status', 'status.id_status = nota.id_status');
-		$this->db->join('users', 'users.id = nota.id_user');
-		$query = $this->db->get('nota');
-		return $query->row();
-	}
-	public function list_data_beli($nota){
-		$this->db->where('menu_to_nota.id_nota',$nota);
-		$this->db->join('menu', 'menu.id_menu = menu_to_nota.id_menu');
-		$query = $this->db->get('menu_to_nota');
-		return $query->result();
-	}
-	public function list_obat(){
-		$this->db->join('kategori', 'kategori.id_kategori = menu.id_kategori');
-		$query = $this->db->get('menu');
-		return $query->result();
-	}
-	public function list_pembelian_hari_ini($tgl){
-		$this->db->where('tgl_nota',$tgl);
-		$this->db->join('status', 'status.id_status = nota.id_status');
-		$this->db->join('users', 'users.id = nota.id_user');
-		$this->db->order_by('nota.id_nota','desc');
-		$query = $this->db->get('nota');
-		return $query->result();
-	}
-	public function lastid($table,$field){
-		$this->db->order_by($field, 'desc');
-		$query = $this->db->get($table);
-		return $query->row();
-	}
-	function create($table,$data){
-		$this->db->insert($table,$data);
-	}
-	function update($table,$field,$id,$data){
-		$this->db->where($field,$id);
-		$this->db->update($table,$data);
-	}
-	function delete($table,$field,$id){
-		$this->db->where($field, $id);
-		$this->db->delete($table);
-	}
-	function count_data_menu($string,$kat){
-		if (!empty($string)) {
-			$this->db->like('nama_menu',$string);
-			$this->db->or_like('kode_menu',$string);
-		}
-		if (!empty($kat)) {
-			$this->db->where('menu.id_kategori',$kat);
-		}
-		return $this->db->get('menu')->num_rows();
-	}
-	public function select_all_data_menu($sampai,$dari,$string,$kat){
-		if (!empty($string)) {
-			$this->db->like('nama_menu',$string);
-			$this->db->or_like('kode_menu',$string);
-		}
-		if (!empty($kat)) {
-			$this->db->where('menu.id_kategori',$kat);
-		}
-		$this->db->join('kategori', 'kategori.id_kategori = menu.id_kategori');
-		$this->db->order_by('nama_menu','asc');
-		$query = $this->db->get('menu',$sampai,$dari);
-		return $query->result();
-	}
-	function count_data_member($string){
-		if (!empty($string)) {
-			$this->db->like('nm_member',$string);
-			$this->db->or_like('kode_member',$string);
-		}
-		return $this->db->get('member')->num_rows();
-	}
-	public function select_all_data_member($sampai,$dari,$string){
-		if (!empty($string)) {
-			$this->db->like('nm_member',$string);
-			$this->db->or_like('kode_member',$string);
-		}
-		$this->db->order_by('kode_member','desc');
-		$query = $this->db->get('member',$sampai,$dari);
+	public function data_pegawai(){
+		$query = $this->db->get('data_pegawai');
 		return $query->result();
 	}
 }

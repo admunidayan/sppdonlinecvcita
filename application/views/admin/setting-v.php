@@ -68,11 +68,6 @@
 			<textarea name="alamat_pt" class="form-control"><?php echo $infopt->alamat_pt; ?></textarea>
 			<small id="alamat_pt" class="form-text text-muted">Semua jenis karakter (Huruf, Angka dan simbol) Dapat digunakan</small>
 		</div>
-		<div class="form-group">
-			<label for="footer_pt">Footer Perusahaan</label>
-			<textarea name="footer_pt" class="form-control"><?php echo $infopt->footer_pt; ?></textarea>
-			<small id="footer_pt" class="form-text text-muted">Merupakan Teks yang akan muncul pada pagian bawah struk saat melakukan cetak struk</small>
-		</div>
 		<button type="submit" name="submit" value="submit" class="btn btn-success">Simpan</button>
 	</form>
 </div>

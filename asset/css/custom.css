@@ -1,19 +1,28 @@
+html,body{
+	height: 100%;
+}
 body{
 	background-color: #eeeeee;
 }
-.table td, .table th {
-    padding: .75rem;
-    vertical-align: middle;
-    border-top: 1px solid #e9ecef;
+.bglog{
+	background: #360033;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #0b8793, #013c67);  /* Chrome 10-25, Safari 5.1-6 */
+background-image: linear-gradient( 135deg, #43CBFF 10%, #9708CC 100%); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 .login-box{
-	max-width: 500px;
-	margin-right: auto;
-	margin-left: auto;
+	height: 583px;
+	margin-right: -14px;
+	margin-left: -14px;
 	background-color: white;
-	padding: 14px 28px;
-	margin-top: 100px;
-	border-radius: 4px;
+	padding: 50px 80px;
+}
+.containerx{
+	width: 884px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
 }
 .bts-ats{
 	margin-top: 14px;
@@ -35,6 +44,21 @@ body{
 	background: -webkit-linear-gradient(left, #0095d6 0%,#00b29d 100%); /* Chrome10-25,Safari5.1-6 */
 	background: linear-gradient(to right, #0095d6 0%,#00b29d 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0095d6', endColorstr='#00b29d',GradientType=1 ); /* IE6-9 */
+}
+.navbox{
+	margin-top: 50px;
+
+}
+.beranda-menu-box{
+	text-align: center;
+	width: 100%;
+	background-color: white;
+	padding: 40px 20px;
+	margin-bottom: 28px;
+}
+.beranda-menu-icon{
+	font-size: 50px;
+	margin-bottom: 20px;
 }
 .navstyle{
 	padding: 14px;
@@ -65,10 +89,13 @@ body{
 	border :1px solid #eeeeee;
 }
 .linkmenu{
-	padding: 10px 10px;
+    height: auto!important;
+    color: white;
+    padding: 10px 0 10px 10px!important;
+    line-height: 1em!important;
 }
 .linkmenu:hover{
-	background-color: white;
+	background-color: #00679e;
 	cursor: pointer;
 }
 .main-box{
@@ -80,6 +107,87 @@ body{
 .pembatas{
 	border-top: 1px solid #cccccc;
 }
-.kirikanan{
-	padding: 1px 3px;
+.ktk-jdl{
+	border-bottom :1px solid #eeeeee;
+	padding-bottom: 14px;
+}
+.jrktbl{
+    padding: .7px 0px;
+	font-size: 12px;
+}
+.table td, .table th {
+	padding: 14px 7px;
+    vertical-align: middle;
+    border-top: 1px solid #e9ecef;
+}
+.bg-app{
+	background-color: #1da9f4
+}
+.submenu{
+	padding: 7px;
+	border-bottom: 1px solid #eeeeee;
+}
+.submenu:hover{
+	cursor: pointer;
+	color: white;
+	background-color: #1da9f4;
+}
+#footer_bottom {
+background-color: #0e639d;
+padding-top: 13px;
+padding-bottom: 17px;
+margin-top:70px;
+}
+#footer_bottom .copyright {
+text-align: center;
+font-size: 16px;
+color: #81ccff;
+}
+#footer_bottom .copyright a {
+color: #fff;
+font-size: 19px;
+}
+.box {
+ background-image: linear-gradient( 135deg, #43CBFF 10%, #9708CC 100%);   
+}
+h4 {
+	font-family: "Roboto",Helvetica Neue,Arial,Helvetica,sans-serif, cursive;
+	font-size: 24px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 26.4px;
+}
+.font1 {
+	font-family: "Roboto", cursive;
+	font-size: 20px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 15.4px;
+}
+h2{
+	font-family: "Roboto",Helvetica Neue,Arial,Helvetica,sans-serif, cursive;
+	font-size: 25px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	color: green;
+	line-height: 20px;
+}
+blockquote {
+	font-family: "Roboto", cursive;
+	font-size: 21px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 30px;
+}
+pre {
+	font-family: "Roboto", cursive;
+	font-size: 13px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 18.5714px;
 }

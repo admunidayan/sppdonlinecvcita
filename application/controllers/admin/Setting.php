@@ -48,7 +48,6 @@ class Setting extends CI_Controller {
                     'kontak_2' => $post['kontak_2'],
                     'kontak_3' => $post['kontak_3'],
                     'kontak_4' => $post['kontak_4'],
-                    'footer_pt' => $post['footer_pt'],
                     'alamat_pt' => $post['alamat_pt'],
                     'slogan' => $post['slogan'],
                     'kontak_4' => $post['kontak_4'],
