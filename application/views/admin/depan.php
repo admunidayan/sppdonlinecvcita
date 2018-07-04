@@ -10,8 +10,8 @@ rel="stylesheet">
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
-	<div class="col-md-6" style="margin-left: 20px"><h2>SISTEM INFORMASI KEPEGAWAIAN</h2></div>
-	<div class="col-md-4"><i class="material-icons">location_on</i>PASAR WAJO, KABUPATEN BUTON</div>
+	<div class="col-md-6" style="margin-left: 20px"><h2>SISTEM INFORMASI PERJALANAN DINAS</h2></div>
+	<div class="col-md-4"><i class="material-icons">location_on</i>BUTON TENGAH</div>
 		<div class="col-md-3">
 			<a class="btn btn-info" href="<?php echo base_url('index.php/login') ?>" style="margin-left: 50px">LOGIN</a>
 		</div>
@@ -21,7 +21,7 @@ rel="stylesheet">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-6" align="center">
-				<h4><p>JUMLAH PEGAWAI KABUPATEN BUTON</p></h4>
+				<h4><p>JUMLAH PEGAWAI</p></h4>
 			</div>
 			<div class="col-md-6" align="center">
 				<h4><?php echo $this->Pegawai_m->jml() ?> Orang</h4>
@@ -86,7 +86,7 @@ rel="stylesheet">
 								text: 'Grafik Pegawai Per-Eselon'
 							},
 							subtitle: {
-								text: 'Source: Database Kabupaten Buton'
+								text: 'Source: Database '
 							},
 							xAxis: {
 								type: 'category',
