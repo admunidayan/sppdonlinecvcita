@@ -3,10 +3,21 @@
 </div>
 <div style="margin-top: 14px; background-color: white;padding: 30px">
 	Cari Pegawai<hr/>
-	<div class="form-group">
-		<label>Nama Pegawai</label>
-		<input type="text" class="form-control" placeholder="Masukan Nama Pegawai">
-		<small class="form-text text-muted">Gunakan Huruf melakukan pengisian ini</small>
+	<div class="row">
+		<div class="col">
+			<div class="form-group">
+				<label>Nama Pegawai</label>
+				<input type="text" class="form-control" placeholder="Masukan Nama Pegawai">
+				<small class="form-text text-muted">Gunakan Huruf melakukan pengisian ini</small>
+			</div>
+		</div>
+		<div class="col">
+			<div class="form-group">
+				<label>Golongan</label>
+				<input type="text" class="form-control" placeholder="Masukan Golongan">
+				<small class="form-text text-muted">Gunakan Huruf melakukan pengisian ini</small>
+			</div>
+		</div>	
 	</div>
 </div>
 <div style="margin-top: 14px; background-color: white;padding: 30px">
@@ -41,6 +52,13 @@
 			<div class="form-group">
 				<label>Kode Anggaran</label>
 				<input type="text" class="form-control" placeholder="Masukan Kode Anggaran">
+				<small class="form-text text-muted">Maksimal 114 karakter</small>
+			</div>
+		</div>
+		<div class="col">
+			<div class="form-group">
+				<label>Jumlah Bayar</label>
+				<input type="text" class="form-control" placeholder="Masukan Jumlah Bayar">
 				<small class="form-text text-muted">Maksimal 114 karakter</small>
 			</div>
 		</div>
@@ -218,6 +236,71 @@
 		<label>Keterangan</label><hr/>
 		<textarea class="form-control" placeholder="Masukan Keterangan"></textarea>
 		<small class="form-text text-muted">Maksimal 114 Karakter</small>
+	</div>
+</div>
+<div style="margin-top: 14px; background-color: white;padding: 30px">
+	<div class="row">
+		<div class="col">
+			<div class="form-group">
+				<label>Nama Angkutan</label>
+				<input type="text" class="form-control" placeholder="Masukan Nama Angkutan">
+				<small class="form-text text-muted">Maksimal 114 Karakter</small>
+			</div>
+		</div>
+		<div class="col">
+			<div class="form-group">
+				<label>Uraian Kas</label>
+				<input type="text" class="form-control" placeholder="Masukan Uraian Kas">
+				<small class="form-text text-muted">Gunakan Angka</small>
+			</div>
+		</div>	
+	</div>
+	<div class="row">
+		<div class="col">
+			<div class="form-group">
+				<label>Volume (OT)</label>
+				<input type="text" class="form-control" placeholder="Masukan Volume OT">
+				<small class="form-text text-muted">Gunakan Angka</small>
+			</div>
+		</div>
+		<div class="col">
+			<div class="form-group">
+				<label>No Rekening</label>
+				<input type="text" class="form-control" placeholder="Masukan Uraian Kas">
+				<small class="form-text text-muted">Maksimal 114 Karakter</small>
+			</div>
+		</div>	
+	</div>
+</div>
+<div style="margin-top: 14px; background-color: white;padding: 30px">
+	<div class="row">
+		<div class="col">
+			<div class="form-group">
+				<label>Pejabat Yang Memerintah</label>
+				<input type="text" class="form-control" placeholder="Masukan Nama Pejabat">
+				<small class="form-text text-muted">Maksimal 114 Karakter</small>
+			</div>
+		</div>
+		<div class="col">
+			<div class="form-group">
+				<label>Jabatan</label>
+				<input type="text" class="form-control" placeholder="Masukan Jabatan">
+				<small class="form-text text-muted">Maksimal 114 Karakter</small>
+			</div>
+		</div>	
+		<div class="col">
+			<div class="form-group">
+				<label>Tiba Berangkat</label>
+				<input type="text" class="form-control" placeholder="Masukan Tiba Berangkat">
+				<small class="form-text text-muted">Maksimal 114 Karakter</small>
+			</div>
+		</div>
+		<div class="col">
+			<form>
+				<input type="radio" name="1">Tidak Di Wakili<br/>
+				<input type="radio" name="2">Di Wakili
+			</form>
+		</div>
 	</div>
 	<button type="button" class="btn btn-success">Simpan</button>
 </div>
