@@ -2,18 +2,41 @@
 	Tambah SPPD Luar Daerah
 </div>
 <div style="margin-top: 14px; background-color: white;padding: 30px">
-	Cari Pegawai<hr/>
+	Detail Pegawai<hr/>
 	<div class="row">
 		<div class="col">
 			<div class="form-group">
 				<label>Nama Pegawai</label>
-				<input type="text" class="form-control" placeholder="Masukan Nama Pegawai">
+				<input type="text" class="form-control" placeholder="Masukan Nama Pegawai" value="<?php echo $hasil->nama_pegawai ?>">
 				<small class="form-text text-muted">Gunakan Huruf melakukan pengisian ini</small>
 			</div>
 		</div>
 		<div class="col">
 			<div class="form-group">
+				<label>NIP</label>
+				<input type="text" class="form-control" placeholder="Masukan Nama Pegawai" value="<?php echo $hasil->nip ?>">
+				<small class="form-text text-muted">hanya boleh menggunakan angka</small>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
+			<div class="form-group">
 				<label>Golongan</label>
+				<input type="text" class="form-control" placeholder="Masukan Golongan" value="<?php echo $dtgolongan ?>">
+				<small class="form-text text-muted">Gunakan Huruf melakukan pengisian ini</small>
+			</div>
+		</div>	
+		<div class="col">
+			<div class="form-group">
+				<label>Pangkat</label>
+				<input type="text" class="form-control" placeholder="Masukan Golongan">
+				<small class="form-text text-muted">Gunakan Huruf melakukan pengisian ini</small>
+			</div>
+		</div>	
+		<div class="col">
+			<div class="form-group">
+				<label>Eselon</label>
 				<input type="text" class="form-control" placeholder="Masukan Golongan">
 				<small class="form-text text-muted">Gunakan Huruf melakukan pengisian ini</small>
 			</div>

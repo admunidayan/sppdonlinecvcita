@@ -36,7 +36,7 @@
 			</thead>
 			<tbody>
 				<?php $no = 1 ?>
-				<?php foreach ($hasil2 as $data): ?>
+				<?php foreach ($hasil as $data): ?>
 					<tr>
 						<td class="jrktbl text-center"><?php echo $no; ?></td>
 						<td class="jrktbl text-secondary"><?php echo strtoupper($data->nama_pegawai); ?></td>

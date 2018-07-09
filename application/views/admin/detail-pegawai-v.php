@@ -89,6 +89,14 @@
 					</div>
 				</div>
 			</a>
+			<a class="text-dark" href="<?php echo base_url('index.php/admin/pegawai/daftar_sppd_ld/'.$hasil->id_pegawai); ?>">
+				<div class="submenu">
+					<div class="row">
+						<div class="col-md-2 text-center text-secondary"><i class="material-icons">assignment_turned_in</i> </div>
+						<div class="col-md-10">SPPD Luar Kota</div>
+					</div>
+				</div>
+			</a>
 		</div>
 		<div class="col-md-9">
 			<div class="media">

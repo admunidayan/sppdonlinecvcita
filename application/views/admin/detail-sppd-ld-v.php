@@ -5,21 +5,11 @@
 				Data SPPD Luar Daerah <span class="text-secondary">Jumlah <?php echo $jmldata; ?></span>
 			</div>
 			<div class="media-right">
-				<a class="btn btn-outline-success btn-sm" href="<?php echo base_url('index.php/admin/sppd_ld/create') ?>"><i class="material-icons">note_add</i> Tambah data SPPD Luar Daerah</a>
+				<a class="btn btn-outline-success btn-sm" href="<?php echo base_url('index.php/admin/pegawai/tambah_sppd_ld/'.$hasil->id_pegawai) ?>"><i class="material-icons">note_add</i> Tambah data SPPD Luar Daerah</a>
 			</div>
 		</div>
 	</div>
 	<div class="ktk-badan bts-ats">
-		<form action="<?php echo base_url('index.php/admin/sppd_ld/index/') ?>" method="get">
-			<div class="form-group">
-				<div class="row">
-					<div class="col">
-						<input type="text" name="string" class="form-control" placeholder="Masukan Nama, NIP Baru atau NIP Lama">
-						<small class="form-text text-muted">Tekan Enter untuk melakukan pencarian honorer</small>
-					</div>
-				</div>
-			</div>
-		</form>
 		<table class="table table-bordered table-hover">
 			<thead>
 				<tr class="bg-app text-light">

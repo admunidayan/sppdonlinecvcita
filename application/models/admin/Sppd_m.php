@@ -21,6 +21,28 @@ class Sppd_m extends CI_Model
 		$query = $this->db->get('sppd_ld',$sampai,$dari);
 		return $query->result();
 	}
+	public function jumlah_data_detail_pegawai($id,$string){
+		$this->db->select('sppd_ld.*,data_pegawai.id_pegawai,data_pegawai.nip,data_pegawai.nip_lama,data_pegawai.nama_pegawai');
+		$this->db->from('sppd_ld');
+		$this->db->join('data_pegawai', 'data_pegawai.id_pegawai = sppd_ld.id_pegawai');
+		if (!empty($string)) {
+			$this->db->like('nama_pegawai',$string);
+		}
+		$this->db->where('sppd_ld.id_pegawai',$id);
+		$rs = $this->db->count_all_results();
+		return $rs;
+	}
+	public function searcing_data_detail_pegawai($id,$sampai,$dari,$string){
+		// $this->db->select('data_pegawai.*,master_golongan');
+		$this->db->select('sppd_ld.*,data_pegawai.id_pegawai,data_pegawai.nip,data_pegawai.nip_lama,data_pegawai.nama_pegawai');
+		$this->db->join('data_pegawai', 'data_pegawai.id_pegawai = sppd_ld.id_pegawai');
+		if (!empty($string)) {
+			$this->db->like('data_pegawai.nama_pegawai',$string);}
+		$this->db->where('sppd_ld.id_pegawai',$id);
+		$this->db->order_by('id_sppd_ld','desc');
+		$query = $this->db->get('sppd_ld',$sampai,$dari);
+		return $query->result();
+	}
 	public function detail_pegawai($id){
 		// $this->db->select('data_pegawai.*,master_golongan');
 		$this->db->join('master_golongan', 'master_golongan.id_golongan = data_pegawai.id_golongan');
@@ -50,5 +72,13 @@ class Sppd_m extends CI_Model
 	public function update_data($tabel,$field,$id,$data){
 		$this->db->where($field, $id);
 		$this->db->update($tabel,$data);
+	}
+	// sppd detail bagian detail para pegawai
+	public function last_golongan($id){
+		$this->db->where('id_pegawai',$id);
+		$this->db->join('master_golongan', 'master_golongan.id_golongan = data_riwayat_golongan.id_golongan');
+		$this->db->order_by('id_riwayat_golongan','desc');
+		$query = $this->db->get('data_riwayat_golongan');
+		return $query->row();
 	}
 }
