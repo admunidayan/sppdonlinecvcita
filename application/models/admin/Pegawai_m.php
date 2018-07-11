@@ -65,9 +65,19 @@ class Pegawai_m extends CI_Model
 		$query = $this->db->get('data_riwayat_golongan');
 		return $query->result();
 	}
+	public function data_rpangkat($id){
+		$this->db->where('id_pegawai', $id);
+		$query = $this->db->get('data_riwayat_pangkat');
+		return $query->result();
+	}
 	public function data_rjabatan($id){
 		$this->db->where('id_pegawai', $id);
 		$query = $this->db->get('data_riwayat_jabatan');
+		return $query->result();
+	}
+	public function data_reselon($id){
+		$this->db->where('id_pegawai', $id);
+		$query = $this->db->get('data_riwayat_eselon');
 		return $query->result();
 	}
 	public function data_pendidikan($id){

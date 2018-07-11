@@ -57,7 +57,7 @@ class Sppd_ld extends CI_Controller {
                 // pengaturan searching
                 $data['jmldata'] = $jumlah;
                 $data['nmr'] = $offset;
-                $data['hasil'] = $this->Sppd_m->searcing_data($config['per_page'],$offset,@$post['string'],@$post['skpd']);
+                $data['hasil2'] = $this->Sppd_m->searcing_data($config['per_page'],$offset,@$post['string'],@$post['skpd']);
                 $data['pagging'] = $this->pagination->create_links();
                 // pagging setting
                 $this->load->view('admin/dashboard-v',$data);

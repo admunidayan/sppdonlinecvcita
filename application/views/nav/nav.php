@@ -16,14 +16,14 @@
 				</div>
 			</li>
 		</a>
-		<a href="<?php echo base_url('index.php/admin/honorer/') ?>">
+		<!-- <a href="<?php echo base_url('index.php/admin/honorer/') ?>">
 			<li class="linkmenu">
 				<div class="row">
 					<div class="col-md-2 text-center"><i class="material-icons">supervisor_account</i> </div>
 					<div class="col-md-10">Honorer</div>
 				</div>
 			</li>
-		</a>
+		</a> -->
 		<a href="<?php echo base_url('index.php/admin/sppd_ld/') ?>">
 			<li class="linkmenu">
 				<div class="row">

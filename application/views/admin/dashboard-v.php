@@ -83,7 +83,7 @@ rel="stylesheet">
       </nav>
       <?php $this->view($page); ?>
     <div id="footer_bottom" class="footer_bottom">
-      <div class="text-light text-center"><?php  echo date('Y'); ?> © ISI NAMA KANTOR</div>
+      <div class="text-light text-center"><?php  echo date('Y'); ?> © Badan Kepegawaian dan Pengembangan Sumber Daya Manusia Kabupaten Buton Tengah</div>
     </div>
   </div>
 </body>

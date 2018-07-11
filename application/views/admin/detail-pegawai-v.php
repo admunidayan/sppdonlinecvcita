@@ -8,7 +8,7 @@
 					<div class="col-md-10">Data Utama</div>
 				</div>
 			</div></a>
-			<a class="text-dark" href="<?php echo base_url('index.php/admin/pegawai/detail_keluarga/'.$hasil->id_pegawai); ?>">
+			<!-- <a class="text-dark" href="<?php echo base_url('index.php/admin/pegawai/detail_keluarga/'.$hasil->id_pegawai); ?>">
 				<div class="submenu">
 					<div class="row">
 						<div class="col-md-2 text-center text-secondary"><i class="material-icons">face</i> </div>
@@ -16,7 +16,7 @@
 						<div class="col-md-10">Keluarga</div>
 					</div>
 				</div>
-			</a>
+			</a> -->
 			<a class="text-dark" href="<?php echo base_url('index.php/admin/pegawai/detail_rgolongan/'.$hasil->id_pegawai); ?>">
 				<div class="submenu">
 					<div class="row">
@@ -33,23 +33,39 @@
 					</div>
 				</div>
 			</a>
-			<a class="text-dark" href="<?php echo base_url('index.php/admin/pegawai/detail_pendidikan/'.$hasil->id_pegawai); ?>">
+			<a class="text-dark" href="<?php echo base_url('index.php/admin/pegawai/detail_rpangkat/'.$hasil->id_pegawai); ?>">
+				<div class="submenu">
+					<div class="row">
+						<div class="col-md-2 text-center text-secondary"><i class="material-icons">perm_identity</i> </div>
+						<div class="col-md-10">Riwayat Pangkat</div>
+					</div>
+				</div>
+			</a>
+			<a class="text-dark" href="<?php echo base_url('index.php/admin/pegawai/detail_reselon/'.$hasil->id_pegawai); ?>">
+				<div class="submenu">
+					<div class="row">
+						<div class="col-md-2 text-center text-secondary"><i class="material-icons">perm_identity</i> </div>
+						<div class="col-md-10">Riwayat Eselon</div>
+					</div>
+				</div>
+			</a>
+			<!-- <a class="text-dark" href="<?php echo base_url('index.php/admin/pegawai/detail_pendidikan/'.$hasil->id_pegawai); ?>">
 				<div class="submenu">
 					<div class="row">
 						<div class="col-md-2 text-center text-secondary"><i class="material-icons">school</i> </div>
 						<div class="col-md-10">Pendidikan</div>
 					</div>
 				</div>
-			</a>
-			<a class="text-dark" href="<?php echo base_url('index.php/admin/pegawai/detail_pelatihan/'.$hasil->id_pegawai); ?>">
+			</a> -->
+			<!-- <a class="text-dark" href="<?php echo base_url('index.php/admin/pegawai/detail_pelatihan/'.$hasil->id_pegawai); ?>">
 				<div class="submenu">
 					<div class="row">
 						<div class="col-md-2 text-center text-secondary"><i class="material-icons">work</i> </div>
 						<div class="col-md-10">Diklat/Kursus</div>
 					</div>
 				</div>
-			</a>
-			<a class="text-dark" href="<?php echo base_url('index.php/admin/pegawai/detail_penghargaan/'.$hasil->id_pegawai); ?>">
+			</a> -->
+			<!-- <a class="text-dark" href="<?php echo base_url('index.php/admin/pegawai/detail_penghargaan/'.$hasil->id_pegawai); ?>">
 				<div class="submenu">
 					<div class="row">
 						<div class="col-md-2 text-center text-secondary"><i class="material-icons">stars</i> </div>
@@ -88,7 +104,7 @@
 						<div class="col-md-10">SKP</div>
 					</div>
 				</div>
-			</a>
+			</a> -->
 			<a class="text-dark" href="<?php echo base_url('index.php/admin/pegawai/daftar_sppd_ld/'.$hasil->id_pegawai); ?>">
 				<div class="submenu">
 					<div class="row">
