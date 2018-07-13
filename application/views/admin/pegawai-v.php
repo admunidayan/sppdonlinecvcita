@@ -18,7 +18,7 @@
 						<input type="text" name="string" class="form-control" placeholder="Masukan Nama, NIP Baru atau NIP Lama">
 						<small class="form-text text-muted">Tekan Enter untuk melakukan pencarian pegawai</small>
 					</div>
-					<div class="col">
+					<!-- <div class="col">
 						<select class="form-control" name="skpd" onchange="this.form.submit()">
 							<option value=""> Pilih Lokasi </option>
 							<option value=""> SEMUA LOKASI </option>
@@ -27,7 +27,7 @@
 								<?php endforeach ?>
 						</select>
 						<small class="form-text text-muted">Pilih Unit Organisasi</small>
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</form>
@@ -35,12 +35,12 @@
 			<thead>
 				<tr class="bg-app text-light">
 					<td class="jrktbl text-center">No</td>
-					<td class="jrktbl"><i class="material-icons">assignment_ind</i>Nama Pegawai</td>
-					<td class="jrktbl"><i class="material-icons">card_giftcard</i>NIP</td>
-					<td class="jrktbl"><i class="material-icons">card_giftcard</i>NIP Lama</td>
-					<td class="jrktbl"><i class="material-icons">location_on</i>Alamat Pegawai</td>
-					<td class="jrktbl"><i class="material-icons">lightbulb_outline</i>Status</td>
-					<td class="jrktbl"><i class="material-icons">power_settings_new</i>Aksi</td>
+					<td class="jrktbl" align="center">Nama Pegawai</td>
+					<td class="jrktbl" align="center">NIP</td>
+					<td class="jrktbl" align="center">NIP Lama</td>
+					<td class="jrktbl" align="center">Alamat Pegawai</td>
+					<td class="jrktbl" align="center">Status</td>
+					<td class="jrktbl" align="center">Aksi</td>
 				</tr>
 			</thead>
 			<tbody>

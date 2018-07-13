@@ -594,6 +594,38 @@ class Pegawai extends CI_Controller {
             redirect(base_url('index.php/login'));
         }
     }
+    public function cetak_sppd_ld($id,$sppd){
+        if ($this->ion_auth->logged_in()) {
+            $level = array('admin','members');
+            if (!$this->ion_auth->in_group($level)) {
+                $pesan = 'Anda tidak memiliki Hak untuk Mengakses halaman ini';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/dashboard'));
+            }else{
+                $this->load->model('admin/Sppd_m');
+                $result = $this->Pegawai_m->detail_pegawai($id);
+                // echo "<pre>";print_r($result);echo "<pre/>";exit();
+                $data['title'] = 'Cetak SPPD - '.$result->nama_pegawai;
+                $data['infopt'] = $this->Admin_m->info_pt(1);
+                $data['brand'] = 'asset/img/lembaga/'.$this->Admin_m->info_pt(1)->logo_pt;
+                $data['users'] = $this->ion_auth->user()->row();
+                $data['aside'] = 'nav/nav';
+                $data['hasil'] = $result;
+                $data['hasil2'] = $this->Admin_m->detail_data_order('sppd_ld','id_sppd_ld',$sppd);
+                $data['dtgolongan'] = $this->Sppd_m->last_golongan($id);
+                $data['dtpangkat'] = $this->Sppd_m->last_pangkat($id);
+                $data['provinsi'] = $this->Pegawai_m->select_data('master_provinsi');
+                $data['tjabatan'] = $this->Pegawai_m->select_data('master_jabatan');
+                $data['dteselon'] = $this->Sppd_m->last_eselon($id);
+                // pagging setting
+                $this->load->view('admin/cetak-sppd-ld-v',$data);
+            }
+        }else{
+            $pesan = 'Login terlebih dahulu';
+            $this->session->set_flashdata('message', $pesan );
+            redirect(base_url('index.php/login'));
+        }
+    }
     public function create(){
         if ($this->ion_auth->logged_in()) {
             $level = array('admin','members');

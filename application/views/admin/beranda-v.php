@@ -1,7 +1,7 @@
 <script src="<?php echo base_url('asset/grafik/code/highcharts.js') ?>"></script>
 <script src="<?php echo base_url('asset/grafik/code/modules/exporting.js') ?>"></script>
 <div class="row" style="margin-top: 14px; background-color: white;padding: 30px">
-    <div class="col-md-8">
+    <div class="col-md-12">
         <div>
             <div id="container" style="min-width: 600px; height: 600px; margin: 0 auto"></div>
             
@@ -12,10 +12,10 @@
                         type: 'column'
                     },
                     title: {
-                        text: 'GRAFIK JUMLAH PEGAWAI PER-SKPD'
+                        text: 'GRAFIK JUMLAH SPPD'
                     },
                     subtitle: {
-                        text: 'Source: Database Kabupaten Buton'
+                        text: 'Source: Database '
                     },
                     xAxis: {
                         type: 'category',
@@ -60,7 +60,7 @@
     </script>
 </div>
 </div>
-<div class="col-md-4">
+<!-- <div class="col-md-4">
     <table border="1" style="font-size: 12px">
         <thead>
             <tr>
@@ -77,5 +77,5 @@
             <?php endforeach ?>
         </tbody>
     </table>
-</div>
+</div> -->
 </div>

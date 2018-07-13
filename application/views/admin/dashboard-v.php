@@ -51,16 +51,18 @@ rel="stylesheet">
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="<?php echo base_url('index.php/admin/master/') ?>"><i class="material-icons">label_outline</i>Status Pegawai</a>
                   <a class="dropdown-item" href="<?php echo base_url('index.php/admin/master/satuan_kerja') ?>"><i class="material-icons">bookmark_border</i>Satuan Kerja</a>
-                  <a class="dropdown-item" href="<?php echo base_url('index.php/admin/master/ppk') ?>"><i class="material-icons">remove_red_eye</i>PPK</a>
+                  <!-- <a class="dropdown-item" href="<?php echo base_url('index.php/admin/master/ppk') ?>"><i class="material-icons">remove_red_eye</i>PPK</a> -->
                   <a class="dropdown-item" href="<?php echo base_url('index.php/admin/master/golongan') ?>"><i class="material-icons">compare_arrows</i>Golongan</a>
                   <a class="dropdown-item" href="<?php echo base_url('index.php/admin/master/eselon') ?>"><i class="material-icons">autorenew</i>Eselon</a>
-                  <a class="dropdown-item" href="<?php echo base_url('index.php/admin/master/pelatihan') ?>"><i class="material-icons">assignment</i>Pelatihan</a>
+                  <!-- <a class="dropdown-item" href="<?php echo base_url('index.php/admin/master/pelatihan') ?>"><i class="material-icons">assignment</i>Pelatihan</a> -->
                   <a class="dropdown-item" href="<?php echo base_url('index.php/admin/master/jabatan') ?>"><i class="material-icons">work</i>Jabatan</a>
-                  <a class="dropdown-item" href="<?php echo base_url('index.php/admin/master/status_jabatan') ?>"><i class="material-icons">playlist_add_check</i>Jenis KP</a>
+                  <a class="dropdown-item" href="<?php echo base_url('index.php/admin/master/uang_harian') ?>"><i class="material-icons">payment</i>Uang Harian</a>
+                  <a class="dropdown-item" href="<?php echo base_url('index.php/admin/master/uang_hotel') ?>"><i class="material-icons">payment</i>Uang Hotel</a>
+                  <!-- <a class="dropdown-item" href="<?php echo base_url('index.php/admin/master/status_jabatan') ?>"><i class="material-icons">playlist_add_check</i>Jenis KP</a>
                   <a class="dropdown-item" href="<?php echo base_url('index.php/admin/master/penghargaan') ?>"><i class="material-icons">stars</i>Penghargaan</a>
                   <a class="dropdown-item" href="<?php echo base_url('index.php/admin/master/hukuman') ?>"><i class="material-icons">select_all</i>Hukuman</a>
                   <a class="dropdown-item" href="<?php echo base_url('index.php/admin/master/lokasi_pelatihan') ?>"><i class="material-icons">location_on</i>Lokasi Pelatihan</a>
-                  <a class="dropdown-item" href="<?php echo base_url('index.php/admin/master/lokasi_kerja') ?>"><i class="material-icons">location_searching</i>Lokasi Kerja</a>
+                  <a class="dropdown-item" href="<?php echo base_url('index.php/admin/master/lokasi_kerja') ?>"><i class="material-icons">location_searching</i>Lokasi Kerja</a> -->
                 </div>
               </li>
               <li class="nav-item dropdown" style="margin-left: 7px">
@@ -69,12 +71,12 @@ rel="stylesheet">
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <a class="dropdown-item" href="<?php echo base_url('index.php/admin/Export_excel') ?>"><i class="material-icons">assignment_ind</i>Data Pegawai</a>
-                  <a class="dropdown-item" href="<?php echo base_url('index.php/admin/Export_honorer') ?>"><i class="material-icons">assignment_ind</i>Data Honorer</a>
+                  <!-- <a class="dropdown-item" href="<?php echo base_url('index.php/admin/Export_honorer') ?>"><i class="material-icons">assignment_ind</i>Data Honorer</a>
                   <a class="dropdown-item" href="<?php echo base_url('index.php/admin/export/data_pegawai') ?>"><i class="material-icons">bookmark_border</i>Daftar Listing Nominatif PNS</a>
                   <a class="dropdown-item" href="<?php echo base_url('index.php/admin/Export_golongan') ?>"><i class="material-icons">select_all</i>Peg. Per Golongan</a>
                   <a class="dropdown-item" href="<?php echo base_url('index.php/admin/export/') ?>"><i class="material-icons">work</i>Peg. Per Jabatan</a>
                   <a class="dropdown-item" href="<?php echo base_url('index.php/admin/export/') ?>"><i class="material-icons">remove_red_eye</i>Peg. Per Pendidikan</a>
-                  <a class="dropdown-item" href="<?php echo base_url('index.php/admin/export/') ?>"><i class="material-icons">remove_red_eye</i>Peg. Per SKPD</a>
+                  <a class="dropdown-item" href="<?php echo base_url('index.php/admin/export/') ?>"><i class="material-icons">remove_red_eye</i>Peg. Per SKPD</a> -->
                 
               </li>
             </ul>
