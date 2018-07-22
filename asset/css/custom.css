@@ -7,7 +7,7 @@ body{
 .bglog{
 	background: #360033;  /* fallback for old browsers */
 background: -webkit-linear-gradient(to right, #0b8793, #013c67);  /* Chrome 10-25, Safari 5.1-6 */
-background-image: linear-gradient( 135deg, #43CBFF 10%, #9708CC 100%); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+background-image: linear-gradient( 135deg, #F05F57 10%, #360940 100%); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 }
 .login-box{
@@ -118,10 +118,10 @@ background-image: linear-gradient( 135deg, #43CBFF 10%, #9708CC 100%); /* W3C, I
 .table td, .table th {
 	padding: 14px 7px;
     vertical-align: middle;
-    border-top: 1px solid #e9ecef;
+    border-top: 1px solid #bdc3c7;
 }
 .bg-app{
-	background-color: #1da9f4
+	background-color: #bdc3c7
 }
 .submenu{
 	padding: 7px;
@@ -133,7 +133,7 @@ background-image: linear-gradient( 135deg, #43CBFF 10%, #9708CC 100%); /* W3C, I
 	background-color: #1da9f4;
 }
 #footer_bottom {
-background-color: #0e639d;
+background-color: #c0392b;
 padding-top: 13px;
 padding-bottom: 17px;
 margin-top:70px;
@@ -148,7 +148,7 @@ color: #fff;
 font-size: 19px;
 }
 .box {
- background-image: linear-gradient( 135deg, #43CBFF 10%, #9708CC 100%);   
+ background-image: linear-gradient( 135deg, #F05F57 10%, #360940 100%);   
 }
 h4 {
 	font-family: "Roboto",Helvetica Neue,Arial,Helvetica,sans-serif, cursive;

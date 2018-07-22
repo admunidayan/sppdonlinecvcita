@@ -181,45 +181,63 @@ public function update(){
                 redirect(base_url('index.php/admin/dashboard'));
             }else{
                 $post = $this->input->post();
-                $datainput = array(
-                    'id_pegawai' => $post['id_pegawai'],
-                    'tahun' => $post['tahun'],
-                    'no_bukti'=>$post['no_bukti'],
-                    'tgl_bukti'=>$post['tgl_bukti_thn'].'-'.$post['tgl_bukti_bln'].'-'.$post['tgl_bukti_hr'],
-                    'keperluan'=>$post['keperluan'],
-                    'kd_anggaran'=>$post['kd_anggaran_thn'].'-'.$post['kd_anggaran_bln'].'-'.$post['kd_anggaran_hr'],
-                    'jml_bayar'=>$post['jml_bayar'],
+                 $datainput = array(
+                    'id_jenis_perjadin' => $post['id_jenis_perjadin'],
+                    'tgl_sppd' => $post['tgl_sppd'],
+                    'no_perjadin' => $post['no_perjadin'],
+                    'nomor' => $post['nomor'],
+                    'tgl_bukti'=>$post['tgl_bukti'],
+                    'maksud_perjadin'=>$post['maksud_perjadin'],
+                    'tujuan_perjadin'=>$post['tujuan_perjadin'],
+                    'kd_anggaran'=>$post['kd_anggaran'],
                     'id_golongan'=>$post['id_golongan'],
+                    'id_jabatan'=>$post['fjabatan'],
+                    'id_pangkat'=>$post['id_pangkat'],
                     'tujuan'=>$post['tujuan'],
-                    'tgl_berangkat'=>$post['tmt_thn'].'-'.$post['tmt_bln'].'-'.$post['tmt_hr'],
-                    'tgl_kembali'=>$post['tgl_kembali_thn'].'-'.$post['tgl_kembali_bln'].'-'.$post['tgl_kembali_hr'],
+                    'tgl_berangkat'=>$post['tgl_berangkat'],
+                    'tgl_kembali'=>$post['tgl_kembali'],
                     'lama_hari'=>$post['lama_hari'],
-                    'uang_perhari'=>$post['uang_perhari'],
-                    'total_uang'=>$post['total_uang'],
-                    'akomodasi_hotel'=>$post['akomodasi_hotel'],
-                    'biaya_representasi'=>$post['biaya_representasi'],
+                    'uraian_kas'=>$post['uraian_kas'],
+                    'tempat_berangkat'=>$post['tempat_berangkat'],
+                    'pejabat_yang_memerintah'=>$post['pejabat_yang_memerintah'],
+                    'id_eselon'=>$post['id_eselon'],
+                    'no_rek' => $post['no_rek'],
+                    'instansi' => $post['instansi'],
+                    'id_bendahara' => $post['id_bendahara'],
+                    'nip_bendahara' => $post['nip_bendahara'],
+                    'pejabat_mengetahui'=>$post['pejabat_mengetahui'],
+                    'biaya_riil'=>$post['biaya_riil'],
+                    'dasar_pelaksanaan'=>$post['dasar_pelaksanaan'],
+                    'isi_laporan'=>$post['isi_laporan'],
+                    'alat_angkutan'=>$post['alat_angkutan'],
+                    'biaya_pergi'=>$post['biaya_pergi'],
+                    'biaya_pulang'=>$post['biaya_pulang'],
                     'biaya_lain'=>$post['biaya_lain'],
-                    'biaya_tiket_pp'=>$post['biaya_tiket_pp'],
-                    'jumlah'=>$post['jumlah'],
-                    'nama_penginapan'=>$post['nama_penginapan'],
-                    'tujuan_ta'=>$post['tujuan_ta'],
-                    'tgl_ta_berangkat'=>$post['tgl_ta_berangkat_thn'].'-'.$post['tgl_ta_berangkat_bln'].'-'.$post['tgl_ta_berangkat_hr'],
-                    'pesawat_berangkat'=>$post['pesawat_berangkat'],
-                    'no_tiket_berangkat'=>$post['no_tiket_berangkat'],
-                    'kd_book_berangkat'=>$post['kd_book_berangkat'],
-                    'harga_berangkat'=>$post['harga_berangkat'],
-                    'tgl_ta_kembali'=>$post['tgl_ta_kembali_thn'].'-'.$post['tgl_ta_kembali_bln'].'-'.$post['tgl_ta_kembali_hr'],
-                    'pesawat_kembali'=>$post['pesawat_kembali'],
-                    'no_tiket_kembali'=>$post['no_tiket_kembali'],
-                    'kd_book_kembali'=>$post['kd_book_kembali'],
-                    'harga_kembali'=>$post['harga_kembali'],
-                    'keterangan'=>$post['keterangan']
-                );
+                    'biaya_representasi' =>$post['biaya_representasi'],
+                    'nama_hotel' =>$post['nama_hotel'],
+                    'tgl_ta_berangkat' =>$post['tgl_ta_berangkat'],
+                    'pesawat_berangkat' =>$post['pesawat_berangkat'],
+                    'no_tiket_berangkat' =>$post['no_tiket_berangkat'],
+                    'kode_book_berangkat' =>$post['kode_book_berangkat'],
+                    'harga_berangkat' =>$post['harga_berangkat'],
+                    'tgl_ta_kembali' =>$post['tgl_ta_kembali'],
+                    'pesawat_kembali' =>$post['pesawat_kembali'],
+                    'no_tiket_kembali' =>$post['no_tiket_kembali'],
+                    'kode_book_kembali' =>$post['kode_book_kembali'],
+                    'harga_kembali' =>$post['harga_kembali'],                        
+                    'uang_perhari'=>$post['uang_perhari'],
+                    'total_uang_harian'=>$post['total_uang_harian'],
+                    'uang_hotel'=>$post['uang_hotel'],
+                    'total_uang_hotel'=>$post['total_uang_hotel'],
+                    'jumlah_biaya'=>$post['jumlah_biaya'],
+                    'jumlah_dibayarkan'=>$post['jumlah_dibayarkan'],
+                    'biaya_sisa'=>$post['biaya_sisa']
+                    );
                 // echo "<pre>";print_r($datainput);echo "<pre/>";exit();
                 $this->Sppd_m->update_data('sppd_ld','id_sppd_ld',$post['id_sppd_ld'],$datainput);
                 $pesan = 'Data SPPD Luar Daerah berhasil di diubah';
                 $this->session->set_flashdata('message', $pesan );
-                redirect(base_url('index.php/admin/sppd_ld/'));
+                redirect(base_url('index.php/admin/pegawai/edit_sppd_ld/'.$post['id_pegawai'].'/'.$post['id_sppd_ld']));
             }
         }else{
             $pesan = 'Login terlebih dahulu';

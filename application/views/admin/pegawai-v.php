@@ -5,7 +5,7 @@
 				Data Pegawai <span class="text-secondary">jumlah Pegawai Ditemukan <?php echo $jmldata; ?></span>
 			</div>
 			<div class="media-right">
-				<button type="button" class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#addpegawai"><i class="material-icons">note_add</i> Tambah data Pegawai</button>
+				<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#addpegawai"><i class="material-icons">note_add</i> Tambah data Pegawai</button>
 			</div>
 		</div>
 	</div>
@@ -22,7 +22,7 @@
 						<select class="form-control" name="skpd" onchange="this.form.submit()">
 							<option value=""> Pilih Lokasi </option>
 							<option value=""> SEMUA LOKASI </option>
-<?php foreach ($skpd as $data): ?>
+							<?php foreach ($skpd as $data): ?>
 								<option value="<?php echo $data->id_satuan_kerja ?>"><?php echo $data->nama_satuan_kerja; ?></option>
 								<?php endforeach ?>
 						</select>
@@ -150,12 +150,12 @@
 								<label class="text-info" for="no_hp">NOMOR HANDPHONE</label>
 
 								<input type="text" class="form-control" id="no_hp" name="no_hp" placeholder="Nomor Handphone">
-								</div>
+							</div>
 							<div class="form-group">
 								<label class="text-info" for="email">EMAIL</label>
 
 								<input type="text" class="form-control" id="email" name="email" placeholder="EMAIL">
-								</div>
+							</div>
 							<div class="form-group">
 								<label class="text-info" for="status_pegawai">STATUS PEGAWAI</label>
 								<select class="form-control" name="status_pegawai">
@@ -180,15 +180,15 @@
 							<div class="form-group">
 								<label class="text-info" for="tmt_cpns">TANGGAL PENGANGKATAN CPNS</label>
 								<div class="row">
-								<div class="col">
-								<input type="text" class="form-control" name="tanggal_pengangkatan_cpns_hr" placeholder="DD" >
-								</div>
-								<div class="col">
-								<input type="text" class="form-control" name="tanggal_pengangkatan_cpns_bln" placeholder="BB" >
-								</div>
-								<div class="col">
-								<input type="text" class="form-control" name="tanggal_pengangkatan_cpns_thn" placeholder="TTTT" >
-								</div>
+									<div class="col">
+										<input type="text" class="form-control" name="tanggal_pengangkatan_cpns_hr" placeholder="DD" >
+									</div>
+									<div class="col">
+										<input type="text" class="form-control" name="tanggal_pengangkatan_cpns_bln" placeholder="BB" >
+									</div>
+									<div class="col">
+										<input type="text" class="form-control" name="tanggal_pengangkatan_cpns_thn" placeholder="TTTT" >
+									</div>
 								</div>
 							</div>
 							<div class="form-group">
@@ -199,51 +199,51 @@
 									<?php endforeach ?>
 								</select>
 							</div>
-						
-								<div class="form-group">
+							
+							<div class="form-group">
 								<label class="text-info" for="tmt_cpns">TMT CPNS</label>
 								<div class="row">
-								<div class="col">
-								<input type="text" class="form-control" name="tmt_cpns_hr" placeholder="DD" >
+									<div class="col">
+										<input type="text" class="form-control" name="tmt_cpns_hr" placeholder="DD" >
+									</div>
+									<div class="col">
+										<input type="text" class="form-control" name="tmt_cpns_bln" placeholder="BB" >
+									</div>
+									<div class="col">
+										<input type="text" class="form-control" name="tmt_cpns_thn" placeholder="TTTT" >
+									</div>
 								</div>
-								<div class="col">
-								<input type="text" class="form-control" name="tmt_cpns_bln" placeholder="BB" >
+								
+								<div class="form-group">
+									<label class="text-info" for="tmt_pns">TMT PNS</label>
+									<div class="row">
+										<div class="col">
+											<input type="text" class="form-control" name="tmt_pns_hr" placeholder="DD" >
+										</div>
+										<div class="col">
+											<input type="text" class="form-control" name="tmt_pns_bln" placeholder="BB" >
+										</div>
+										<div class="col">
+											<input type="text" class="form-control" name="tmt_pns_thn" placeholder="TTTT" >
+										</div>
+									</div>
 								</div>
-								<div class="col">
-								<input type="text" class="form-control" name="tmt_cpns_thn" placeholder="TTTT" >
-								</div>
-								</div>
-						
-							<div class="form-group">
-								<label class="text-info" for="tmt_pns">TMT PNS</label>
-								<div class="row">
-								<div class="col">
-								<input type="text" class="form-control" name="tmt_pns_hr" placeholder="DD" >
-								</div>
-								<div class="col">
-								<input type="text" class="form-control" name="tmt_pns_bln" placeholder="BB" >
-								</div>
-								<div class="col">
-								<input type="text" class="form-control" name="tmt_pns_thn" placeholder="TTTT" >
-								</div>
+								
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label class="text-info" for="alamat">ALAMAT PEGAWAI</label>
+										<textarea id="alamat" name="alamat" class="form-control"></textarea>
+									</div>
 								</div>
 							</div>
-						
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="form-group">
-								<label class="text-info" for="alamat">ALAMAT PEGAWAI</label>
-								<textarea id="alamat" name="alamat" class="form-control"></textarea>
-							</div>
+							
 						</div>
-					</div>
-					
+						<div class="modal-footer">
+							<button type="submit" name="submit" value="submit" class="btn btn-secondary">Simpan</button>
+						</div>
+					</form>
 				</div>
-				<div class="modal-footer">
-					<button type="submit" name="submit" value="submit" class="btn btn-success">Simpan</button>
-				</div>
-			</form>
+			</div>
 		</div>
-	</div>
-</div>

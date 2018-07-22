@@ -109,7 +109,23 @@
 				<div class="submenu">
 					<div class="row">
 						<div class="col-md-2 text-center text-secondary"><i class="material-icons">assignment_turned_in</i> </div>
-						<div class="col-md-10">SPPD Luar Kota</div>
+						<div class="col-md-10">SPPD</div>
+					</div>
+				</div>
+			</a>
+			<!-- <a class="text-dark" href="<?php echo base_url('index.php/admin/pegawai/rincian_tiket_sppd/'.$hasil->id_pegawai); ?>">
+				<div class="submenu">
+					<div class="row">
+						<div class="col-md-2 text-center text-secondary"><i class="material-icons">assignment_turned_in</i> </div>
+						<div class="col-md-10">Rincian Tiket/Akomodasi</div>
+					</div>
+				</div>
+			</a> -->
+			<a class="text-dark" href="<?php echo base_url('index.php/admin/pegawai/pengikut_sppd/'.$hasil->id_pegawai); ?>">
+				<div class="submenu">
+					<div class="row">
+						<div class="col-md-2 text-center text-secondary"><i class="material-icons">assignment_turned_in</i> </div>
+						<div class="col-md-10">Tambah Pengikut SPPD</div>
 					</div>
 				</div>
 			</a>
@@ -129,12 +145,12 @@
 					<form action="<?php echo base_url('index.php/admin/pegawai/update_foto_pegawai') ?>" en method="post" enctype="multipart/form-data">
 						<input type="file" name="fotop" id="uploadBtn"></br>
 						<input type="hidden" name="id_pegawai" value="<?php echo $hasil->id_pegawai;?>">
-						<button type="submit" name="submit" value="submit" class="btn btn-success">Simpan</button>
+						<button type="submit" name="submit" value="submit" class="btn btn-secondary">Simpan</button>
 					</form>
 					<span class="border border-success rounded" style="font-size: 12px;padding: 2px 5px; margin-top: 12px; "><?php echo $hasil->nama_status; ?></span>
 				</div>
 				<div class="media-right">
-				<a href="<?php echo base_url('index.php/admin/pegawai/cetak_data_pegawai/'.$hasil->id_pegawai) ?>" target="_blank" class="btn btn-success">Cetak Data Pegawai</a>
+				<a href="<?php echo base_url('index.php/admin/pegawai/cetak_data_pegawai/'.$hasil->id_pegawai) ?>" target="_blank" class="btn btn-secondary">Cetak Data Pegawai</a>
 				</div>
 			</div>
 			<?php $this->view($bagian); ?>

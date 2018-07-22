@@ -6,18 +6,18 @@ rel="stylesheet">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 <link rel="shortcut icon" href="<?php echo base_url($brand); ?>">
 <div class="box">
-<nav class="navbar navbar-expand-lg navbar-light bg-light navbar navbar-light" style="background-image: linear-gradient( 135deg, #43CBFF 10%, #9708CC 100%);">
+<nav class="navbar navbar-expand-lg navbar-light bg-light navbar navbar-light" style="background-image: #c0392b;">
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
 	<div class="col-md-6" style="margin-left: 20px"><h2>SIMPEDA BERKAH</h2></div>
 	<div class="col-md-4"><i class="material-icons">location_on</i>BUTON TENGAH</div>
 		<div class="col-md-3">
-			<a class="btn btn-info" href="<?php echo base_url('index.php/login') ?>" style="margin-left: 50px">LOGIN</a>
+			<a class="btn btn-secondary" href="<?php echo base_url('index.php/login') ?>" style="margin-left: 50px">LOGIN</a>
 		</div>
 	</div>
 </nav>
-<div style="margin-top: 14px; background-image: linear-gradient( 135deg, #43CBFF 10%, #9708CC 100%);padding: 30px" class="p-3 mb-2 bg-secondary text-black">
+<div style="margin-top: 14px; background-image: linear-gradient( 135deg, #F05F57 10%, #360940 100%); padding: 40px" class="p-3 mb-2 bg-secondary text-black">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-6" align="center">
@@ -28,7 +28,7 @@ rel="stylesheet">
 			</div>
 		</div>
 	</div>
-	<div style="margin-top: 14px; background-image: linear-gradient( 135deg, #43CBFF 10%, #9708CC 100%);padding: 30px">
+	<div style="margin-top: 14px; background-image: linear-gradient( 135deg, #F05F57 10%, #360940 100%);padding: 30px">
 		<div class="container">
 			<div class="row">
 				<div class="col">

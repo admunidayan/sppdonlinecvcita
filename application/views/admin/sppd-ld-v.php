@@ -5,7 +5,7 @@
 				Data SPPD Luar Daerah <span class="text-secondary">Jumlah <?php echo $jmldata; ?></span>
 			</div>
 			<div class="media-right">
-				<a class="btn btn-outline-success btn-sm" href="<?php echo base_url('index.php/admin/sppd_ld/create') ?>"><i class="material-icons">note_add</i> Tambah data SPPD Luar Daerah</a>
+				<a class="btn btn-secondary btn-sm" href="<?php echo base_url('index.php/admin/sppd_ld/create') ?>"><i class="material-icons">note_add</i> Tambah data SPPD</a>
 			</div>
 		</div>
 	</div>
@@ -39,17 +39,17 @@
 				<?php foreach ($hasil2 as $data): ?>
 					<tr>
 						<td class="jrktbl text-center"><?php echo $no; ?></td>
-						<td class="jrktbl text-secondary"><?php echo $data->no_bukti; ?></td>
+						<td class="jrktbl text-secondary"><?php echo $data->no_perjadin; ?></td>
 						<td class="jrktbl text-secondary"><?php echo strtoupper($data->nama_pegawai); ?></td>
 						<td class="jrktbl text-secondary"><?php echo $data->nip; ?></td>
-						<td class="jrktbl text-secondary"><?php echo $data->keperluan; ?></td>
+						<td class="jrktbl text-secondary"><?php echo $data->maksud_perjadin; ?></td>
 						<td class="jrktbl text-secondary"><?php echo $data->tujuan; ?></td>
-						<td class="jrktbl text-secondary"><?php echo $data->jml_bayar; ?></td>
+						<td class="jrktbl text-secondary"><?php echo $data->jumlah_biaya; ?></td>
 						<td class="jrktbl">
 							<a href="<?php echo base_url('index.php/admin/sppd_ld/edit/'.$data->id_sppd_ld) ?>" class="text-success">Edit</a>
 						</td>
 						<td class="jrktbl">
-							<a href="<?php echo base_url('index.php/admin/sppd_ld/delete/'.$data->id_sppd_ld) ?>" class="text-danger">Hapus</a>
+							<a href="<?php echo base_url('index.php/admin/sppd_ld/delete_sppd_ld/'.$data->id_sppd_ld) ?>" class="text-danger">Hapus</a>
 						</td>
 					</tr>
 					<?php $no++ ?>

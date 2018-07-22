@@ -1,8 +1,8 @@
-<form action="<?php echo base_url('index.php/admin/pegawai/create_sppd_ld') ?>" method="post">
-	<div style="margin-top: 14px; background-color: white;padding: 30px">
-		Tambah SPPD
-	</div>
-	<div style="margin-top: 14px; background-color: white;padding: 30px">
+<div style="margin-top: 14px; background-color: white;padding: 30px">
+<form action="<?php echo base_url('index.php/admin/sppd_ld/update') ?>" method="post">
+	<input type="hidden" name="id_sppd_ld" value="<?php echo $detail->id_sppd_ld ?>">
+	<div style="background-color: white;padding: 30px">
+		<div>Edit SPPD Luar Daerah</div><hr/>
 		Detail Pegawai<hr/>
 		<div class="row">
 			<div class="col">
@@ -22,14 +22,13 @@
 			</div>
 			<div class="col">
 			<div class="form-group">
-				<label>Jenis Perjalanan Dinas</label>
+				<label>JENIS PERJALANAN DINAS</label>
 				<select class="form-control" name="id_jenis_perjadin">
-					<option value="1">Pilih Jenis Perjalanan Dinas</option>
-					<?php foreach ($jnsperjadin as $datap): ?>
-						<option value="<?php echo $datap->id_jenis_perjadin ?>"><?php echo $datap->jenis_perjadin ?></option>
+					<option value="<?php echo @$detail->id_jenis_perjadin ?>">--<?php echo @$this->Admin_m->detail_data_order('master_jenis_perjadin','id_jenis_perjadin',$detail->id_jenis_perjadin)->jenis_perjadin; ?>--</option>
+					<?php foreach ($jnsperjadin as $data): ?>
+						<option value="<?php echo $data->id_jenis_perjadin ?>"><?php echo $data->jenis_perjadin; ?></option>
 					<?php endforeach ?>
 				</select>
-				<small class="form-text text-muted">Pilih salah satu dari data diatas</small>
 			</div>
 		</div>
 		</div>
@@ -66,7 +65,14 @@
 			<div class="col">
 				<div class="form-group">
 					<label>Nomor SPPD</label>
-					<input type="text" class="form-control" name="no_perjadin" placeholder="Masukan Nomor SPPD">
+					<input type="text" class="form-control" name="no_perjadin" placeholder="Masukan Nomor SPPD" value="<?php echo $detail->no_perjadin ?>">
+					<small class="form-text text-muted">Gunakan Huruf melakukan pengisian ini</small>
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-group">
+					<label>Nomor Surat</label>
+					<input type="text" class="form-control" name="nomor" placeholder="Masukan Nomor Surat" value="<?php echo $detail->nomor ?>">
 					<small class="form-text text-muted">Gunakan Huruf melakukan pengisian ini</small>
 				</div>
 			</div>
@@ -75,14 +81,14 @@
 			<div class="col">
 				<div class="form-group">
 					<label>Tanggal SPPD</label>
-					<input type="text" class="form-control" name="tgl_sppd" placeholder="Masukan Tanggal SPPD" value="<?php echo date('Y-m-d') ?>">
+					<input type="text" class="form-control" name="tgl_sppd" placeholder="Masukan Tanggal SPPD" value="<?php echo $detail->tgl_sppd ?>">
 					<small class="form-text text-muted">Gunakan format yyyy-mm-dd</small>
 				</div>
 			</div>
 			<div class="col">
 				<div class="form-group">
 					<label>Tanggal Bukti Rincian</label>
-					<input type="text" class="form-control" name="tgl_bukti" placeholder="Masukan Tanggal Bukti Rincian">
+					<input type="text" class="form-control" name="tgl_bukti" placeholder="Masukan Tanggal Bukti Rincian" value="<?php echo $detail->tgl_bukti ?>">
 					<small class="form-text text-muted">Gunakan format yyyy-mm-dd</small>
 				</div>
 			</div>
@@ -91,7 +97,7 @@
 			<div class="col">
 				<div class="form-group">
 					<label>Maksud Perjalanan Dinas</label>
-					<textarea class="form-control" name="maksud_perjadin" placeholder="Masukan Maksud Perjalanan Dinas"></textarea>
+					<textarea class="form-control" name="maksud_perjadin" placeholder="Masukan Maksud Perjalanan Dinas"><?php echo $detail->maksud_perjadin ?></textarea>
 					<small class="form-text text-muted">Maksimal 114 karakter</small>
 				</div>
 			</div>
@@ -100,7 +106,7 @@
 			<div class="col">
 				<div class="form-group">
 					<label>Tujuan Perjalanan Dinas</label>
-					<textarea class="form-control" name="tujuan_perjadin" placeholder="Masukan Tujuan Perjalanan Dinas"></textarea>
+					<textarea class="form-control" name="tujuan_perjadin" placeholder="Masukan Tujuan Perjalanan Dinas"><?php echo $detail->tujuan_perjadin ?></textarea>
 					<small class="form-text text-muted">Maksimal 114 karakter</small>
 				</div>
 			</div>
@@ -109,7 +115,7 @@
 			<div class="col">
 				<div class="form-group">
 					<label>Mata Anggaran</label>
-					<input type="text" class="form-control" name="no_rek" placeholder="Masukan Kode Anggaran">
+					<input type="text" class="form-control" name="kd_anggaran" placeholder="Masukan Kode Anggaran" value="<?php echo $detail->kd_anggaran ?>">
 					<small class="form-text text-muted">Maksimal 114 karakter</small>
 				</div>
 			</div>
@@ -123,7 +129,7 @@
 		<div class="col">
 			<div class="form-group">
 				<label>Tujuan</label>
-				<input type="text" class="form-control" name="tujuan" placeholder="Masukan Tujuan">
+				<input type="text" class="form-control" name="tujuan" placeholder="Masukan Tujuan" value="<?php echo $detail->tujuan ?>">
 				<small class="form-text text-muted">Maksimal 114 karakter</small>
 			</div>
 		</div>
@@ -132,14 +138,14 @@
 		<div class="col">
 			<div class="form-group">
 				<label>Tanggal Berangkat</label>
-				<input type="text" class="form-control" name="tgl_berangkat" placeholder="Masukan Tanggal Berangkat">
+				<input type="text" class="form-control" name="tgl_berangkat" value="<?php echo $detail->tgl_berangkat ?>" placeholder="Masukan Tanggal Berangkat" >
 				<small class="form-text text-muted">Gunakan format yyyy-mm-dd</small>
 			</div>
 		</div>
 		<div class="col">
 			<div class="form-group">
 				<label>Tanggal Kembali</label>
-				<input type="text" class="form-control" name="tgl_kembali" placeholder="Masukan Tanggal Kembali">
+				<input type="text" class="form-control" name="tgl_kembali" placeholder="Masukan Tanggal Kembali" value="<?php echo $detail->tgl_kembali ?>">
 				<small class="form-text text-muted">Gunakan format yyyy-mm-dd</small>
 			</div>
 		</div>
@@ -148,21 +154,21 @@
 		<div class="col">
 			<div class="form-group">
 				<label>Lama Hari</label>
-				<input type="text" class="form-control" name="lama_hari" id="lama_hari" placeholder="Masukan Lama Hari">
+				<input type="text" class="form-control" name="lama_hari" id="lama_hari" placeholder="Masukan Lama Hari" value="<?php echo $detail->lama_hari ?>">
 				<small class="form-text text-muted">Hanya Dapat Menggunakan Angka</small>
 			</div>
 		</div>
 		<div class="col">
 			<div class="form-group">
 				<label>Tempat Berangkat</label>
-				<input type="text" class="form-control" name="tempat_berangkat" placeholder="Masukan Tempat Berangkat">
+				<input type="text" class="form-control" name="tempat_berangkat" placeholder="Masukan Tempat Berangkat" value="<?php echo $detail->tempat_berangkat ?>">
 				<small class="form-text text-muted">Hanya Dapat Menggunakan Angka</small>
 			</div>
 		</div>
 		<div class="col">
 			<div class="form-group">
 				<label>Nama Hotel</label>
-				<input type="text" class="form-control" name="nama_hotel" placeholder="Masukan Nama Hotel">
+				<input type="text" class="form-control" name="nama_hotel" placeholder="Masukan Nama Hotel" value="<?php echo $detail->nama_hotel ?>">
 				<small class="form-text text-muted">Maksimal 114 karakter</small>
 			</div>
 		</div>
@@ -201,14 +207,14 @@
 			<div class="form-group">
 				<label>Uang Perhari</label>
 				<!-- <div id="hsluangharian"></div> -->
-				<input type="text" class="form-control" name="uang_perhari" id="hsluangharian">
+				<input type="text" class="form-control" name="uang_perhari" id="hsluangharian" value="<?php echo $detail->uang_perhari ?>">
 				<small class="form-text text-muted">Hanya Dapat Menggunakan Angka</small>
 			</div>
 		</div>
 		<div class="col">
 			<div class="form-group">
 				<label>Biaya Hotel</label>
-				<input type="text" class="form-control" name="uang_hotel" id="hsluanghotel">
+				<input type="text" class="form-control" name="uang_hotel" id="hsluanghotel" value="<?php echo $detail->uang_hotel ?>">
 				<small class="form-text text-muted">Hanya Dapat Menggunakan Angka</small>
 			</div>
 		</div>
@@ -217,14 +223,14 @@
 		<div class="col">
 			<div class="form-group">
 				<label>Total Uang Perhari</label>
-				<input type="text" class="form-control" name="total_uang_harian" id="tuhr" placeholder="Total Uang Harian">
+				<input type="text" class="form-control" name="total_uang_harian" id="tuhr" placeholder="Total Uang Harian" value="<?php echo $detail->total_uang_harian ?>">
 				<small class="form-text text-muted">Hanya Dapat Menggunakan Angka</small>
 			</div>
 		</div>
 		<div class="col">
 			<div class="form-group">
 				<label>Total Biaya Hotel</label>
-				<input type="text" class="form-control" name="total_uang_hotel" id="tbhtl" placeholder="Total Biaya Hotel">
+				<input type="text" class="form-control" name="total_uang_hotel" id="tbhtl" placeholder="Total Biaya Hotel" value="<?php echo $detail->total_uang_hotel ?>">
 				<small class="form-text text-muted">Hanya Dapat Menggunakan Angka</small>
 			</div>
 		</div>
@@ -233,14 +239,14 @@
 		<div class="col">
 			<div class="form-group">
 				<label>Biaya Riil</label>
-				<input type="text" class="form-control" name="biaya_riil" id="byril" placeholder="Masukan Biaya Biaya Rill">
+				<input type="text" class="form-control" name="biaya_riil" id="byril" placeholder="Masukan Biaya Biaya Rill" value="<?php echo $detail->biaya_riil ?>">
 				<small class="form-text text-muted">Hanya Dapat Menggunakan Angka</small>
 			</div>
 		</div>
 		<div class="col">
 			<div class="form-group">
 				<label>Biaya Pergi (Keberangkatan)</label>
-				<input type="text" class="form-control" name="biaya_pergi" id="bypergi" placeholder="Masukan Biaya Keberangkatan">
+				<input type="text" class="form-control" name="biaya_pergi" id="bypergi" placeholder="Masukan Biaya Keberangkatan" value="<?php echo $detail->biaya_pergi ?>">
 				<small class="form-text text-muted">Hanya Dapat Menggunakan Angka</small>
 			</div>
 		</div>
@@ -249,21 +255,21 @@
 		<div class="col">
 			<div class="form-group">
 				<label>Biaya Pulang</label>
-				<input type="text" class="form-control" name="biaya_pulang" id="bypulang" placeholder="Masukan Biaya Kepulangan">
+				<input type="text" class="form-control" name="biaya_pulang" id="bypulang" placeholder="Masukan Biaya Kepulangan" value="<?php echo $detail->biaya_pulang ?>">
 				<small class="form-text text-muted">Hanya Dapat Menggunakan Angka</small>
 			</div>
 		</div>
 		<div class="col">
 			<div class="form-group">
 				<label>Biaya Lain</label>
-				<input type="text" class="form-control" name="biaya_lain" id="bylain" value="0" placeholder="Masukan Biaya Lain Lain PP">
+				<input type="text" class="form-control" name="biaya_lain" id="bylain" placeholder="Masukan Biaya Lain Lain PP" value="<?php echo $detail->biaya_lain ?>">
 				<small class="form-text text-muted">Hanya Dapat Menggunakan Angka</small>
 			</div>
 		</div>
 		<div class="col">
 			<div class="form-group">
 				<label>Biaya Representasi</label>
-				<input type="text" class="form-control" name="biaya_representasi" id="byrep" value="0" placeholder="Masukan Biaya Lain Lain PP">
+				<input type="text" class="form-control" name="biaya_representasi" id="byrep" placeholder="Masukan Biaya Lain Lain PP" value="<?php echo $detail->biaya_representasi ?>">
 				<small class="form-text text-muted">Hanya Dapat Menggunakan Angka</small>
 			</div>
 		</div>
@@ -275,14 +281,14 @@
 		<div class="col">
 			<div class="form-group">
 				<label>Tanggal Berangkat</label>
-				<input type="text" class="form-control" name="tgl_ta_berangkat" placeholder="Masukan Biaya Tanggal Berangkat">
+				<input type="text" class="form-control" name="tgl_ta_berangkat" placeholder="Masukan Biaya Tanggal Berangkat" value="<?php echo $detail->tgl_ta_berangkat ?>">
 				<small class="form-text text-muted">Gunakan format yyyy-mm-dd</small>
 			</div>
 		</div>
 		<div class="col">
 			<div class="form-group">
 				<label>Nama Pesawat KA</label>
-				<input type="text" class="form-control" name="pesawat_berangkat" placeholder="Masukan Nama Pesawat">
+				<input type="text" class="form-control" name="pesawat_berangkat" placeholder="Masukan Nama Pesawat" value="<?php echo $detail->pesawat_berangkat ?>">
 				<small class="form-text text-muted">Gunakan Huruf melakukan pengisian ini</small>
 			</div>
 		</div>
@@ -291,14 +297,14 @@
 		<div class="col">
 			<div class="form-group">
 				<label>Nomor Tiket</label>
-				<input type="text" class="form-control" name="no_tiket_berangkat">
+				<input type="text" class="form-control" name="no_tiket_berangkat" placeholder="Nomor Tiket" value="<?php echo $detail->no_tiket_berangkat ?>">
 				<small class="form-text text-muted">Gunakan Huruf melakukan pengisian ini</small>
 			</div>
 		</div>
 		<div class="col">
 			<div class="form-group">
 				<label>Kode Booking</label>
-				<input type="text" class="form-control" name="kode_book_berangkat">
+				<input type="text" class="form-control" name="kode_book_berangkat" placeholder="Kode Booking" value="<?php echo $detail->kode_book_berangkat ?>">
 				<small class="form-text text-muted">Hanya Dapat Menggunakan Angka</small>
 			</div>
 		</div>
@@ -307,14 +313,14 @@
 		<div class="col">
 			<div class="form-group">
 				<label>Harga Tiket Berangkat</label>
-				<input type="text" class="form-control" name="harga_berangkat" placeholder="Harga Tiket Keberangkatan">
+				<input type="text" class="form-control" name="harga_berangkat" placeholder="Harga Tiket Keberangkatan" value="<?php echo $detail->harga_berangkat ?>">
 				<small class="form-text text-muted">Gunakan format yyyy-mm-dd</small>
 			</div>
 		</div>
 		<div class="col">
 			<div class="form-group">
 				<label>Tanggal Kembali</label>
-				<input type="text" class="form-control" name="tgl_ta_kembali" placeholder="Tanggal Kembali">
+				<input type="text" class="form-control" name="tgl_ta_kembali" placeholder="Tanggal Kembali" value="<?php echo $detail->tgl_ta_kembali ?>">
 				<small class="form-text text-muted">Gunakan Huruf melakukan pengisian ini</small>
 			</div>
 		</div>
@@ -323,14 +329,14 @@
 		<div class="col">
 			<div class="form-group">
 				<label>Nama Pesawat / KA</label>
-				<input type="text" class="form-control" name="pesawat_kembali" placeholder="Masukan Nama Pesawat">
+				<input type="text" class="form-control" name="pesawat_kembali" placeholder="Masukan Nama Pesawat" value="<?php echo $detail->pesawat_kembali ?>">
 				<small class="form-text text-muted">Gunakan Huruf melakukan pengisian ini</small>
 			</div>
 		</div>
 		<div class="col">
 			<div class="form-group">
 				<label>No Tiket</label>
-				<input type="text" class="form-control" name="no_tiket_kembali" placeholder="Masukan Nomor Tiket">
+				<input type="text" class="form-control" name="no_tiket_kembali" placeholder="Masukan Nomor Tiket" value="<?php echo $detail->no_tiket_kembali ?>">
 				<small class="form-text text-muted">Gunakan Huruf melakukan pengisian ini</small>
 			</div>
 		</div>
@@ -339,14 +345,14 @@
 		<div class="col">
 			<div class="form-group">
 				<label>Kode Booking</label>
-				<input type="text" class="form-control" name="kode_book_kembali" id="bypulang" placeholder="Masukan Kode Booking">
+				<input type="text" class="form-control" name="kode_book_kembali" id="bypulang" placeholder="Masukan Kode Booking" value="<?php echo $detail->kode_book_kembali ?>">
 				<small class="form-text text-muted">Gunakan Huruf melakukan pengisian ini</small>
 			</div>
 		</div>
 		<div class="col">
 			<div class="form-group">
 				<label>Harga Tiket</label>
-				<input type="text" class="form-control" name="harga_kembali" id="bylain" value="0" placeholder="Masukan Biaya Tiket">
+				<input type="text" class="form-control" name="harga_kembali" id="bylain" value="0" placeholder="Masukan Biaya Tiket" value="<?php echo $detail->harga_kembali ?>">
 				<small class="form-text text-muted">Hanya Dapat Menggunakan Angka</small>
 			</div>
 		</div>
@@ -358,34 +364,14 @@
 		<div class="col">
 			<div class="form-group">
 				<label>Alat Angkutan</label>
-				<input type="text" class="form-control" name="alat_angkutan" placeholder="Masukan Alat Angkutan yg Digunakan">
+				<input type="text" class="form-control" name="alat_angkutan" placeholder="Masukan Alat Angkutan yg Digunakan" value="<?php echo $detail->alat_angkutan ?>">
 				<small class="form-text text-muted">Maksimal 114 Karakter</small>
 			</div>
 		</div>
-	</div>
-	<div class="row">
 		<div class="col">
 			<div class="form-group">
-				<label>Dasar Pelaksanaan 1</label>
-				<textarea class="form-control" name="dasar_pelaksanaan" placeholder="Masukan Dasar Pelaksanaan"></textarea>
-				<small class="form-text text-muted">Maksimal 114 Karakter</small>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col">
-			<div class="form-group">
-				<label>Dasar Pelaksanaan 2</label>
-				<textarea class="form-control" name="dasar_pelaksanaan_2" placeholder="Masukan Dasar Pelaksanaan"></textarea>
-				<small class="form-text text-muted">Maksimal 114 Karakter</small>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col">
-			<div class="form-group">
-				<label>Dasar Pelaksanaan 3</label>
-				<textarea class="form-control" name="dasar_pelaksanaan_3" placeholder="Masukan Dasar Pelaksanaan"></textarea>
+				<label>Dasar Pelaksanaan</label>
+				<input type="text" class="form-control" name="dasar_pelaksanaan" placeholder="Masukan Dasar Pelaksanaan" value="<?php echo $detail->dasar_pelaksanaan ?>">
 				<small class="form-text text-muted">Maksimal 114 Karakter</small>
 			</div>
 		</div>
@@ -394,21 +380,21 @@
 		<div class="col">
 			<div class="form-group">
 				<label>Bendahara</label>
-				<input type="text" class="form-control" name="id_bendahara" placeholder="Masukan Nama Pejabat">
+				<input type="text" class="form-control" name="id_bendahara" placeholder="Masukan Nama Pejabat" value="<?php echo $detail->id_bendahara ?>">
 				<small class="form-text text-muted">Maksimal 114 Karakter</small>
 			</div>
 		</div>
 		<div class="col">
 			<div class="form-group">
 				<label>NIP Bendahara</label>
-				<input type="text" class="form-control" name="nip_bendahara" placeholder="Masukkan Data Bendahara">
+				<input type="text" class="form-control" name="nip_bendahara" placeholder="Masukkan Data Bendahara" value="<?php echo $detail->nip_bendahara ?>">
 				<small class="form-text text-muted">Maksimal 114 Karakter</small>
 			</div>
 		</div>
 	</div>
 	<div class="form-group">
 		<label>Isi Laporan</label>
-		<textarea class="form-control" name="isi_laporan" placeholder="Masukan Isi Laporan"></textarea>
+		<textarea class="form-control" name="isi_laporan" placeholder="Masukan Isi Laporan"><?php echo $detail->isi_laporan ?></textarea>
 		<small class="form-text text-muted">Maksimal 114 Karakter</small>
 	</div>
 </div>
@@ -417,7 +403,7 @@
 		<div class="col">
 			<div class="form-group">
 				<label>Instansi</label>
-				<input type="text" class="form-control" name="instansi" placeholder="Masukan Nama Angkutan">
+				<input type="text" class="form-control" name="instansi" placeholder="Masukan Nama Angkutan" value="<?php echo $detail->instansi ?>">
 				<small class="form-text text-muted">Maksimal 114 Karakter</small>
 			</div>
 		</div>
@@ -426,19 +412,19 @@
 		<div class="col">
 			<div class="form-group">
 				<label>Uraian Bukti Kas</label>
-				<textarea class="form-control" name="uraian_kas" placeholder="Masukan Uraian"></textarea>
+				<textarea class="form-control" name="uraian_kas" placeholder="Masukan Uraian"><?php echo $detail->uraian_kas ?></textarea>
 				<small class="form-text text-muted">maksimal 3000 karakter</small>
 			</div>
 		</div>
 	</div>
 	<div class="row">
-		<!-- <div class="col">
+		<div class="col">
 			<div class="form-group">
 				<label>No Rekening Anggaran</label>
-				<input type="text" class="form-control" name="no_rek" placeholder="Masukan Nomor Rekening">
+				<input type="text" class="form-control" name="no_rek" placeholder="Masukan Nomor Rekening" value="<?php echo $detail->no_rek ?>">
 				<small class="form-text text-muted">Maksimal 114 Karakter</small>
 			</div>
-		</div>	 -->
+		</div>	
 	</div>
 </div>
 <div style="margin-top: 14px; background-color: white;padding: 30px">
@@ -446,21 +432,21 @@
 		<div class="col">
 			<div class="form-group">
 				<label>Pejabat Yang Memerintah</label>
-				<input type="text" class="form-control" name="pejabat_yang_memerintah" placeholder="Masukan Nama Pejabat">
+				<input type="text" class="form-control" name="pejabat_yang_memerintah" placeholder="Masukan Nama Pejabat" value="<?php echo $detail->pejabat_yang_memerintah ?>">
 				<small class="form-text text-muted">Maksimal 114 Karakter</small>
 			</div>
 		</div>
 		<div class="col">
 			<div class="form-group">
 				<label>Pejabat Mengetahui</label>
-				<input type="text" class="form-control" name="pejabat_mengetahui" placeholder="Masukan Nama Pejabat">
+				<input type="text" class="form-control" name="pejabat_mengetahui" placeholder="Masukan Nama Pejabat" value="<?php echo $detail->pejabat_mengetahui ?>">
 				<small class="form-text text-muted">Maksimal 114 Karakter</small>
 			</div>
 		</div>
 		<div class="col">
 			<div class="form-group">
 				<label>NIP Pejabat Mengetahui</label>
-				<input type="text" class="form-control" name="nip_pejabat_mengetahui" placeholder="Masukan NIP Pejabat Mengetahui">
+				<input type="text" class="form-control" name="nip_pejabat_mengetahui" placeholder="Masukan NIP Pejabat Mengetahui" value="<?php echo $detail->nip_pejabat_mengetahui ?>">
 				<small class="form-text text-muted">Maksimal 114 Karakter</small>
 			</div>
 		</div>
@@ -469,21 +455,21 @@
 		<div class="col">
 			<div class="form-group">
 				<label>Jumlah Biaya</label>
-				<input type="text" class="form-control" name="jumlah_biaya" id="jmlbiayatot" placeholder="Masukan Jumlah Biaya">
+				<input type="text" class="form-control" name="jumlah_biaya" id="jmlbiayatot" placeholder="Masukan Jumlah Biaya" value="<?php echo $detail->jumlah_biaya ?>">
 				<small class="form-text text-muted">Maksimal 114 Karakter</small>
 			</div>
 		</div>
 		<div class="col">
 			<div class="form-group">
 				<label>Jumlah Di Bayarkan</label>
-				<input type="text" class="form-control" name="jumlah_dibayarkan" id="jmldibayarkan" placeholder="Masukan Jumlah Bayar">
+				<input type="text" class="form-control" name="jumlah_dibayarkan" id="jmldibayarkan" placeholder="Masukan Jumlah Bayar" value="<?php echo $detail->jumlah_dibayarkan ?>">
 				<small class="form-text text-muted">Maksimal 114 Karakter</small>
 			</div>
 		</div>
 		<div class="col">
 			<div class="form-group">
 				<label>Sisa Biaya</label>
-				<input type="text" class="form-control" name="biaya_sisa" id="sisabiaya" placeholder="Masukan Sisa Biaya">
+				<input type="text" class="form-control" name="biaya_sisa" id="sisabiaya" placeholder="Masukan Sisa Biaya" value="<?php echo $detail->biaya_sisa ?>">
 				<small class="form-text text-muted">Maksimal 114 Karakter</small>
 			</div>
 		</div>

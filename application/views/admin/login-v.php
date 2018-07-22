@@ -20,7 +20,7 @@
 				</div>
 			</div>
 		<?php endif ;?>
-		<div class="row" style="background-color: white;margin-top: 60px;"> 
+		<div class="row" style="background-color: white; margin-top: 60px;"> 
 			<div class="col">
 				<div class="login-box ">
 					<!-- <h1 class="text-center border border-top-0 border-left-0 border-right-0 border-secondary bts-bwh">LOGIN</h1> -->
@@ -41,7 +41,7 @@
 							<input type="password" name="password" class="form-control form-control-lg border border-info" id="exampleInputPassword1" placeholder="Password">
 							<small id="emailHelp" class="form-text text-muted">Password minimal 8 karakter</small>
 						</div>
-						<button type="submit" style="width:100%;" class="btn btn-info btn-lg">Masuk</button>
+						<button type="submit" style="width:100%;" class="btn btn-secondary">Masuk</button>
 					</form>
 					<div class="row bts-ats">
 						<div class="col">Lupa Password</div>
@@ -53,7 +53,7 @@
 				</div>
 			</div>
 			<div class="col">
-				<div class="login-box text-center" style="background-image: url(<?php echo base_url('asset/img/lembaga/bg.jpg'); ?>);">
+				<div class="login-box text-center" style="background-image: url(<?php echo base_url('asset/img/lembaga/tes.jpg'); ?>);">
 					<h4 class="text-light text-left" style="margin-top: 150px;"><?php echo $infopt->slogan; ?></h4>
 				</div>
 			</div>

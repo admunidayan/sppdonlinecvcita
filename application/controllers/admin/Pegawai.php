@@ -249,6 +249,7 @@ class Pegawai extends CI_Controller {
                 $data['hasil'] = $result;
                 $data['reselon'] = $this->Pegawai_m->data_reselon($id);
                 $data['eselon'] = $this->Pegawai_m->select_data('master_eselon');
+                $data['jnsjabatan'] = $this->Pegawai_m->select_data('master_jenis_jabatan');
                 $data['bagian'] = 'admin/data-reselon-v';
                 $data['page'] = 'admin/detail-pegawai-v';
                 // pagging setting
@@ -561,6 +562,235 @@ class Pegawai extends CI_Controller {
             redirect(base_url('index.php/login'));
         }
     }
+    public function edit_sppd_ld($id,$idsppd){
+        if ($this->ion_auth->logged_in()) {
+            $level = array('admin','members');
+            if (!$this->ion_auth->in_group($level)) {
+                $pesan = 'Anda tidak memiliki Hak untuk Mengakses halaman ini';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/dashboard'));
+            }else{
+                $this->load->model('admin/Sppd_m');
+                $result = $this->Pegawai_m->detail_pegawai($id);
+                // echo "<pre>";print_r($result);echo "<pre/>";exit();
+                $data['title'] = $result->nama_pegawai;
+                $data['infopt'] = $this->Admin_m->info_pt(1);
+                $data['brand'] = 'asset/img/lembaga/'.$this->Admin_m->info_pt(1)->logo_pt;
+                $data['users'] = $this->ion_auth->user()->row();
+                $data['aside'] = 'nav/nav';
+                $data['hasil'] = $result;
+                $data['detail'] = $this->Admin_m->detail_data_order('sppd_ld','id_sppd_ld',$id);
+                // echo "<pre>";echo print_r($data['detail']);echo "<pre/>";exit();
+                $data['dtgolongan'] = $this->Sppd_m->last_golongan($id);
+                $data['dtpangkat'] = $this->Sppd_m->last_pangkat($id);
+                $data['provinsi'] = $this->Pegawai_m->select_data('master_provinsi');
+                $data['jnsperjadin'] = $this->Pegawai_m->select_data('master_jenis_perjadin');
+                $data['tjabatan'] = $this->Pegawai_m->select_data('master_jabatan');
+                $data['dteselon'] = $this->Sppd_m->last_eselon($id);
+                $data['bagian'] = 'admin/edit-sppd-ld-v';
+                $data['page'] = 'admin/detail-pegawai-v';
+                // pagging setting
+                $this->load->view('admin/dashboard-v',$data);
+            }
+        }else{
+            $pesan = 'Login terlebih dahulu';
+            $this->session->set_flashdata('message', $pesan );
+            redirect(base_url('index.php/login'));
+        }
+    }
+    public function update_sppd_ld($idpegawai,$idr){
+        if ($this->ion_auth->logged_in()) {
+            $level = array('admin','members');
+            if (!$this->ion_auth->in_group($level)) {
+                $pesan = 'Anda tidak memiliki Hak untuk Mengakses halaman ini';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/dashboard'));
+            }else{
+                $post = $this->input->post();
+                $datainput = array(
+                    'id_golongan'=>$post['id_golongan'],
+                    'nomor_sk'=>$post['nomor_sk'],
+                    'tanggal_sk'=>$post['tanggal_sk_thn'].'-'.$post['tanggal_sk_bln'].'-'.$post['tanggal_sk_hr'],
+                    'tmt_golongan'=>$post['tmt_golongan_thn'].'-'.$post['tmt_golongan_bln'].'-'.$post['tmt_golongan_hr'],
+                    'nomor_bkn'=>$post['nomor_bkn'],
+                    'tanggal_bkn'=>$post['tanggal_bkn_thn'].'-'.$post['tanggal_bkn_bln'].'-'.$post['tanggal_bkn_hr'],
+                    'masa_kerja' =>$post['masa_kerja']
+                );
+                $this->Pegawai_m->update_data('data_riwayat_golongan','id_riwayat_golongan',$idr,$datainput);
+                $pesan = 'Data riwayat golongan baru berhasil di diubah';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/pegawai/detail_rgolongan/'.$idpegawai));
+            }
+        }else{
+            $pesan = 'Login terlebih dahulu';
+            $this->session->set_flashdata('message', $pesan );
+            redirect(base_url('index.php/login'));
+        }
+    }
+    public function pengikut_sppd($id,$offset=0){
+        if ($this->ion_auth->logged_in()) {
+            $level = array('admin','members');
+            if (!$this->ion_auth->in_group($level)) {
+                $pesan = 'Anda tidak memiliki Hak untuk Mengakses halaman ini';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/dashboard'));
+            }else{
+                $this->load->model('admin/Sppd_m');
+                $post = $this->input->get();
+                $data['title'] = $this->Admin_m->info_pt(1)->nama_info_pt;
+                $data['infopt'] = $this->Admin_m->info_pt(1);
+                $data['brand'] = 'asset/img/lembaga/'.$this->Admin_m->info_pt(1)->logo_pt;
+                $data['users'] = $this->ion_auth->user()->row();
+                $data['aside'] = 'nav/nav';
+                $jumlah = $this->Sppd_m->jumlah_data_detail_pegawai($id,@$post['string']);
+                $config['base_url'] = base_url().'/index.php/admin/sppd_ld/index/';
+                $config['total_rows'] = $jumlah;
+                $config['per_page'] = '10';
+                $config['first_page'] = 'Awal';
+                $config['last_page'] = 'Akhir';
+                $config['next_page'] = '&laquo;';
+                $config['prev_page'] = '&raquo;';
+                // bootstap style
+                $config['first_link']       = 'Pertama';
+                $config['last_link']        = 'Terakhir';
+                $config['next_link']        = 'Selanjutnya';
+                $config['prev_link']        = 'Sebelumnya';
+                $config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
+                $config['full_tag_close']   = '</ul></nav></div>';
+                $config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
+                $config['num_tag_close']    = '</span></li>';
+                $config['cur_tag_open']     = '<li class="page-item active"><span class="page-link">';
+                $config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li>';
+                $config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
+                $config['next_tagl_close']  = '<span aria-hidden="true">&raquo;</span></span></li>';
+                $config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
+                $config['prev_tagl_close']  = '</span>Next</li>';
+                $config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
+                $config['first_tagl_close'] = '</span></li>';
+                $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
+                $config['last_tagl_close']  = '</span></li>';
+                //inisialisasi config
+                $this->pagination->initialize($config);
+               
+                $data['golongan'] = $this->Sppd_m->select_data('master_golongan');
+                
+                // pengaturan searching
+                $data['jmldata'] = $jumlah;
+                $data['nmr'] = $offset;
+
+                $data['detail']=$this->Pegawai_m->detail_pegawai($id);
+                $result = $this->Pegawai_m->detail_pegawai($id);
+                $data['hasil'] = $result;
+                $data['hasil2'] = $this->Sppd_m->searcing_data_detail_pegawai($id,$config['per_page'],$offset,@$post['string']);
+                $data['pagging'] = $this->pagination->create_links();
+                // pagging setting
+                $data['bagian'] = 'admin/pengikut-sppd-ld-v';
+                $data['page'] = 'admin/detail-pegawai-v';
+                $this->load->view('admin/dashboard-v',$data);
+            }
+        }else{
+            $pesan = 'Login terlebih dahulu';
+            $this->session->set_flashdata('message', $pesan );
+            redirect(base_url('index.php/login'));
+        }
+    }
+    public function tambah_pengikut_sppd_ld($id,$sppd){
+        if ($this->ion_auth->logged_in()) {
+            $level = array('admin','members');
+            if (!$this->ion_auth->in_group($level)) {
+                $pesan = 'Anda tidak memiliki Hak untuk Mengakses halaman ini';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/dashboard'));
+            }else{
+                $this->load->model('admin/Sppd_m');
+                $result = $this->Pegawai_m->detail_pegawai($id);
+                // echo "<pre>";print_r($result);echo "<pre/>";exit();
+                $data['title'] = $result->nama_pegawai;
+                $data['infopt'] = $this->Admin_m->info_pt(1);
+                $data['brand'] = 'asset/img/lembaga/'.$this->Admin_m->info_pt(1)->logo_pt;
+                $data['users'] = $this->ion_auth->user()->row();
+                $data['aside'] = 'nav/nav';
+                $data['hasil'] = $result;
+                $data['hasil2'] = $this->Admin_m->detail_data_order('sppd_ld','id_sppd_ld',$sppd);
+                $data['hasil3'] = $this->Sppd_m->data_pengikut($sppd);
+                $data['bagian'] = 'admin/tambah-pengikut-sppd-v';
+                $data['page'] = 'admin/detail-pegawai-v';
+                // pagging setting
+                $this->load->view('admin/dashboard-v',$data);
+            }
+        }else{
+            $pesan = 'Login terlebih dahulu';
+            $this->session->set_flashdata('message', $pesan );
+            redirect(base_url('index.php/login'));
+        }
+    }
+    public function rincian_tiket_sppd($id,$offset=0){
+        if ($this->ion_auth->logged_in()) {
+            $level = array('admin','members');
+            if (!$this->ion_auth->in_group($level)) {
+                $pesan = 'Anda tidak memiliki Hak untuk Mengakses halaman ini';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/dashboard'));
+            }else{
+                $this->load->model('admin/Sppd_m');
+                $post = $this->input->get();
+                $data['title'] = $this->Admin_m->info_pt(1)->nama_info_pt;
+                $data['infopt'] = $this->Admin_m->info_pt(1);
+                $data['brand'] = 'asset/img/lembaga/'.$this->Admin_m->info_pt(1)->logo_pt;
+                $data['users'] = $this->ion_auth->user()->row();
+                $data['aside'] = 'nav/nav';
+                $jumlah = $this->Sppd_m->jumlah_data_detail_pegawai($id,@$post['string']);
+                $config['base_url'] = base_url().'/index.php/admin/sppd_ld/index/';
+                $config['total_rows'] = $jumlah;
+                $config['per_page'] = '10';
+                $config['first_page'] = 'Awal';
+                $config['last_page'] = 'Akhir';
+                $config['next_page'] = '&laquo;';
+                $config['prev_page'] = '&raquo;';
+                // bootstap style
+                $config['first_link']       = 'Pertama';
+                $config['last_link']        = 'Terakhir';
+                $config['next_link']        = 'Selanjutnya';
+                $config['prev_link']        = 'Sebelumnya';
+                $config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
+                $config['full_tag_close']   = '</ul></nav></div>';
+                $config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
+                $config['num_tag_close']    = '</span></li>';
+                $config['cur_tag_open']     = '<li class="page-item active"><span class="page-link">';
+                $config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li>';
+                $config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
+                $config['next_tagl_close']  = '<span aria-hidden="true">&raquo;</span></span></li>';
+                $config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
+                $config['prev_tagl_close']  = '</span>Next</li>';
+                $config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
+                $config['first_tagl_close'] = '</span></li>';
+                $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
+                $config['last_tagl_close']  = '</span></li>';
+                //inisialisasi config
+                $this->pagination->initialize($config);
+               
+                $data['golongan'] = $this->Sppd_m->select_data('master_golongan');
+                
+                // pengaturan searching
+                $data['jmldata'] = $jumlah;
+                $data['nmr'] = $offset;
+
+                $data['detail']=$this->Pegawai_m->detail_pegawai($id);
+                $result = $this->Pegawai_m->detail_pegawai($id);
+                $data['hasil'] = $result;
+                $data['hasil2'] = $this->Sppd_m->searcing_data_detail_pegawai($id,$config['per_page'],$offset,@$post['string']);
+                $data['pagging'] = $this->pagination->create_links();
+                // pagging setting
+                $data['bagian'] = 'admin/data-rincian-tiket-v';
+                $data['page'] = 'admin/detail-pegawai-v';
+                $this->load->view('admin/dashboard-v',$data);
+            }
+        }else{
+            $pesan = 'Login terlebih dahulu';
+            $this->session->set_flashdata('message', $pesan );
+            redirect(base_url('index.php/login'));
+        }
+    }
     public function tambah_sppd_ld($id){
         if ($this->ion_auth->logged_in()) {
             $level = array('admin','members');
@@ -581,6 +811,7 @@ class Pegawai extends CI_Controller {
                 $data['dtgolongan'] = $this->Sppd_m->last_golongan($id);
                 $data['dtpangkat'] = $this->Sppd_m->last_pangkat($id);
                 $data['provinsi'] = $this->Pegawai_m->select_data('master_provinsi');
+                $data['jnsperjadin'] = $this->Pegawai_m->select_data('master_jenis_perjadin');
                 $data['tjabatan'] = $this->Pegawai_m->select_data('master_jabatan');
                 $data['dteselon'] = $this->Sppd_m->last_eselon($id);
                 $data['bagian'] = 'admin/tambah-sppd-ld-v';
@@ -614,8 +845,10 @@ class Pegawai extends CI_Controller {
                 $data['hasil2'] = $this->Admin_m->detail_data_order('sppd_ld','id_sppd_ld',$sppd);
                 $data['dtgolongan'] = $this->Sppd_m->last_golongan($id);
                 $data['dtpangkat'] = $this->Sppd_m->last_pangkat($id);
+                $data['dtsatuan'] = $this->Sppd_m->last_satuan_kerja($id);
                 $data['provinsi'] = $this->Pegawai_m->select_data('master_provinsi');
                 $data['tjabatan'] = $this->Pegawai_m->select_data('master_jabatan');
+                $data['jnsperjadin'] = $this->Pegawai_m->select_data('master_jenis_perjadin');
                 $data['dteselon'] = $this->Sppd_m->last_eselon($id);
                 // pagging setting
                 $this->load->view('admin/cetak-sppd-ld-v',$data);
@@ -684,54 +917,70 @@ class Pegawai extends CI_Controller {
             }else{
                 $this->load->model('admin/Sppd_m');
                 $post = $this->input->post();
-                $uangperhari = $this->Sppd_m->biaya_harian($post['provinsi'],$post['fjabatan'])->biaya;
-                $totbiayaharian =$uangperhari*$post['lama_hari'];
+                // $uangperhari = $this->Sppd_m->biaya_harian($post['provinsi'],$post['fjabatan'])->biaya;
+                // $totbiayaharian =$uangperhari*$post['lama_hari'];
                 $datainput = array(
                     'id_pegawai' => $post['id_pegawai'],
-                    'id_golongan'=>$post['id_golongan'],
-                    'id_eselon'=>$post['id_eselon'],
-                    'id_pangkat'=>$post['id_pangkat'],
+                    'id_jenis_perjadin' => $post['id_jenis_perjadin'],
+                    'tgl_sppd' => $post['tgl_sppd'],
                     'tahun' => date('Y'),
-                    'alat_transportasi' =>$post['alat_transportasi'],
-                    'no_bukti'=>$post['no_bukti'],
+                    'no_perjadin' => $post['no_perjadin'],
+                    // 'nomor' => $post['nomor'],
                     'tgl_bukti'=>$post['tgl_bukti'],
-                    'keperluan'=>$post['keperluan'],
-                    'uraian_kas'=>$post['uraian_kas'],
+                    'maksud_perjadin'=>$post['maksud_perjadin'],
+                    'tujuan_perjadin'=>$post['tujuan_perjadin'],
                     'kd_anggaran'=>$post['kd_anggaran'],
+                    'id_golongan'=>$post['id_golongan'],
+                    'id_jabatan'=>$post['fjabatan'],
+                    'id_pangkat'=>$post['id_pangkat'],
                     'tujuan'=>$post['tujuan'],
                     'tgl_berangkat'=>$post['tgl_berangkat'],
                     'tgl_kembali'=>$post['tgl_kembali'],
                     'lama_hari'=>$post['lama_hari'],
-                    'akomodasi_hotel'=>$post['akomodasi_hotel'],
-                    'biaya_representasi'=>$post['biaya_representasi'],
-                    'biaya_lain'=>$post['biaya_lain'],
-                    'nama_penginapan'=>$post['nama_penginapan'],
-                    'tujuan_ta'=>$post['tujuan_ta'],
-                    'tgl_ta_berangkat'=>$post['tgl_ta_berangkat'],
-                    'pesawat_berangkat'=>$post['pesawat_berangkat'],
-                    'no_tiket_berangkat'=>$post['no_tiket_berangkat'],
-                    'kd_book_berangkat'=>$post['kd_book_berangkat'],
-                    'harga_berangkat'=>$post['harga_berangkat'],
-                    'tgl_ta_kembali'=>$post['tgl_ta_kembali'],
-                    'pesawat_kembali'=>$post['pesawat_kembali'],
-                    'no_tiket_kembali'=>$post['no_tiket_kembali'],
-                    'kd_book_kembali'=>$post['kd_book_kembali'],
-                    'harga_kembali'=>$post['harga_kembali'],
-                    'keterangan'=>$post['keterangan'],
+                    'uraian_kas'=>$post['uraian_kas'],
+                    'tempat_berangkat'=>$post['tempat_berangkat'],
                     'pejabat_yang_memerintah'=>$post['pejabat_yang_memerintah'],
-                    'pegawai_ttd'=>$post['pegawai_ttd'],
-                    'jabatan_ttd'=>$post['jabatan_ttd'],
+                    'id_eselon'=>$post['id_eselon'],
                     'no_rek' => $post['no_rek'],
-                    'uang_perhari'=>$uangperhari,
-                    'total_uang'=>$totbiayaharian,
-                    'biaya_tiket_pp'=>$post['harga_berangkat']+$post['harga_kembali'],
-                    'jumlah'=>$totbiayaharian+$post['harga_berangkat']+$post['harga_kembali'],
-                    'jml_bayar'=>$totbiayaharian+$post['harga_berangkat']+$post['harga_kembali'],
+                    'instansi' => $post['instansi'],
+                    'id_bendahara' => $post['id_bendahara'],
+                    'nip_bendahara' => $post['nip_bendahara'],
+                    'pejabat_mengetahui'=>$post['pejabat_mengetahui'],
+                    'biaya_riil'=>$post['biaya_riil'],
+                    'dasar_pelaksanaan'=>$post['dasar_pelaksanaan'],
+                    'dasar_pelaksanaan_2'=>$post['dasar_pelaksanaan_2'],
+                    'dasar_pelaksanaan_3'=>$post['dasar_pelaksanaan_3'],
+                    'isi_laporan'=>$post['isi_laporan'],
+                    'alat_angkutan'=>$post['alat_angkutan'],
+                    'biaya_pergi'=>$post['biaya_pergi'],
+                    'biaya_pulang'=>$post['biaya_pulang'],
+                    'biaya_lain'=>$post['biaya_lain'],
+                    'biaya_representasi' =>$post['biaya_representasi'],
+                    'nama_hotel' =>$post['nama_hotel'],
+                    'tgl_ta_berangkat' =>$post['tgl_ta_berangkat'],
+                    'pesawat_berangkat' =>$post['pesawat_berangkat'],
+                    'no_tiket_berangkat' =>$post['no_tiket_berangkat'],
+                    'kode_book_berangkat' =>$post['kode_book_berangkat'],
+                    'harga_berangkat' =>$post['harga_berangkat'],
+                    'tgl_ta_kembali' =>$post['tgl_ta_kembali'],
+                    'pesawat_kembali' =>$post['pesawat_kembali'],
+                    'no_tiket_kembali' =>$post['no_tiket_kembali'],
+                    'kode_book_kembali' =>$post['kode_book_kembali'],
+                    'harga_kembali' =>$post['harga_kembali'],                        
+                    'uang_perhari'=>$post['uang_perhari'],
+                    'total_uang_harian'=>$post['total_uang_harian'],
+                    'uang_hotel'=>$post['uang_hotel'],
+                    'total_uang_hotel'=>$post['total_uang_hotel'],
+                    'jumlah_biaya'=>$post['jumlah_biaya'],
+                    'jumlah_dibayarkan'=>$post['jumlah_dibayarkan'],
+                    'biaya_sisa'=>$post['biaya_sisa'],
+
                 );
                 $this->Sppd_m->insert_data('sppd_ld',$datainput);
-                $pesan = 'Data Honorer baru berhasil di tambahkan';
+                
+                $pesan = 'Data SPPD baru berhasil di tambahkan';
                 $this->session->set_flashdata('message', $pesan );
-                redirect(base_url('index.php/admin/sppd_ld'));
+                redirect(base_url('index.php/admin/pegawai/daftar_sppd_ld'));
             }
         }else{
             $pesan = 'Login terlebih dahulu';
@@ -764,6 +1013,123 @@ class Pegawai extends CI_Controller {
                 $pesan = 'Data kerluarga baru berhasil di tambahkan';
                 $this->session->set_flashdata('message', $pesan );
                 redirect(base_url('index.php/admin/pegawai/detail_keluarga/'.$idpegawai));
+            }
+        }else{
+            $pesan = 'Login terlebih dahulu';
+            $this->session->set_flashdata('message', $pesan );
+            redirect(base_url('index.php/login'));
+        }
+    }
+    public function create_rpangkat($idpegawai){
+        if ($this->ion_auth->logged_in()) {
+            $level = array('admin','members');
+            if (!$this->ion_auth->in_group($level)) {
+                $pesan = 'Anda tidak memiliki Hak untuk Mengakses halaman ini';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/dashboard'));
+            }else{
+                $post = $this->input->post();
+                $datainput = array(
+                    'id_pegawai' => $idpegawai,
+                    'id_pangkat'=>$post['id_pangkat'],
+                    'status'=>$post['status'],
+                    'nomor_sk'=>$post['nomor_sk'],
+                    'tanggal_sk'=>$post['tanggal_sk_thn'].'-'.$post['tanggal_sk_bln'].'-'.$post['tanggal_sk_hr'],
+                    'tanggal_mulai'=>$post['tanggal_mulai_thn'].'-'.$post['tanggal_mulai_bln'].'-'.$post['tanggal_mulai_hr'],
+                    'tanggal_selesai'=>$post['tanggal_selesai_thn'].'-'.$post['tanggal_selesai_bln'].'-'.$post['tanggal_selesai_hr'],
+                    'masa_kerja' =>$post['masa_kerja'],
+                    'masa_kerja_bulan' =>$post['masa_kerja_bulan'],
+                    'masa_kerja_tahun' =>$post['masa_kerja_tahun']
+                );
+                $this->Pegawai_m->insert_data('data_riwayat_pangkat',$datainput);
+                $pesan = 'Data riwayat pangkat baru berhasil di tambahkan';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/pegawai/detail_rpangkat/'.$idpegawai));
+            }
+        }else{
+            $pesan = 'Login terlebih dahulu';
+            $this->session->set_flashdata('message', $pesan );
+            redirect(base_url('index.php/login'));
+        }
+    }
+    public function create_reselon($idpegawai){
+        if ($this->ion_auth->logged_in()) {
+            $level = array('admin','members');
+            if (!$this->ion_auth->in_group($level)) {
+                $pesan = 'Anda tidak memiliki Hak untuk Mengakses halaman ini';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/dashboard'));
+            }else{
+                $post = $this->input->post();
+                $datainput = array(
+                    'id_pegawai' => $idpegawai,
+                    'id_eselon'=>$post['id_eselon'],
+                    'id_jenis_jabatan'=>$post['id_jenis_jabatan'],
+                    'nm_jabatan'=>$post['nm_jabatan'],
+                    'nomor_sk'=>$post['nomor_sk']
+                );
+                $this->Pegawai_m->insert_data('data_riwayat_eselon',$datainput);
+                $pesan = 'Data riwayat esleon baru berhasil di tambahkan';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/pegawai/detail_reselon/'.$idpegawai));
+            }
+        }else{
+            $pesan = 'Login terlebih dahulu';
+            $this->session->set_flashdata('message', $pesan );
+            redirect(base_url('index.php/login'));
+        }
+    }
+    public function edit_reselon($id,$idr){
+        if ($this->ion_auth->logged_in()) {
+            $level = array('admin','members');
+            if (!$this->ion_auth->in_group($level)) {
+                $pesan = 'Anda tidak memiliki Hak untuk Mengakses halaman ini';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/dashboard'));
+            }else{
+                $result = $this->Pegawai_m->detail_pegawai($id);
+                // echo "<pre>";print_r($result);echo "<pre/>";exit();
+                $data['title'] = $result->nama_pegawai;
+                $data['infopt'] = $this->Admin_m->info_pt(1);
+                $data['brand'] = 'asset/img/lembaga/'.$this->Admin_m->info_pt(1)->logo_pt;
+                $data['users'] = $this->ion_auth->user()->row();
+                $data['aside'] = 'nav/nav';
+                $data['hasil'] = $result;
+                $data['detail'] = $this->Pegawai_m->detail_data('data_riwayat_eselon','id_riwayat_eselon',$idr);
+                $data['bagian'] = 'admin/edit-reselon-v';
+                $data['reselon'] = $this->Pegawai_m->data_reselon($id);
+                $data['eselon'] = $this->Pegawai_m->select_data('master_eselon');
+                $data['jnsjabatan'] = $this->Pegawai_m->select_data('master_jenis_jabatan');
+                $data['page'] = 'admin/detail-pegawai-v';
+                // pagging setting
+                $this->load->view('admin/dashboard-v',$data);
+            }
+        }else{
+            $pesan = 'Login terlebih dahulu';
+            $this->session->set_flashdata('message', $pesan );
+            redirect(base_url('index.php/login'));
+        }
+    }
+    public function update_reselon($idpegawai,$idr){
+        if ($this->ion_auth->logged_in()) {
+            $level = array('admin','members');
+            if (!$this->ion_auth->in_group($level)) {
+                $pesan = 'Anda tidak memiliki Hak untuk Mengakses halaman ini';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/dashboard'));
+            }else{
+                $post = $this->input->post();
+                $datainput = array(
+                    'id_pegawai' => $idpegawai,
+                    'id_eselon'=>$post['id_eselon'],
+                    'id_jenis_jabatan'=>$post['id_jenis_jabatan'],
+                    'nm_jabatan'=>$post['nm_jabatan'],
+                    'nomor_sk'=>$post['nomor_sk']
+                );
+                $this->Pegawai_m->update_data('data_riwayat_eselon','id_riwayat_eselon',$idr,$datainput);
+                $pesan = 'Data riwayat eselon baru berhasil di diubah';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/pegawai/detail_reselon/'.$idpegawai));
             }
         }else{
             $pesan = 'Login terlebih dahulu';
@@ -1073,6 +1439,67 @@ class Pegawai extends CI_Controller {
             redirect(base_url('index.php/login'));
         }
     }
+    public function edit_rpangkat($id,$idr){
+        if ($this->ion_auth->logged_in()) {
+            $level = array('admin','members');
+            if (!$this->ion_auth->in_group($level)) {
+                $pesan = 'Anda tidak memiliki Hak untuk Mengakses halaman ini';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/dashboard'));
+            }else{
+                $result = $this->Pegawai_m->detail_pegawai($id);
+                // echo "<pre>";print_r($result);echo "<pre/>";exit();
+                $data['title'] = $result->nama_pegawai;
+                $data['infopt'] = $this->Admin_m->info_pt(1);
+                $data['brand'] = 'asset/img/lembaga/'.$this->Admin_m->info_pt(1)->logo_pt;
+                $data['users'] = $this->ion_auth->user()->row();
+                $data['aside'] = 'nav/nav';
+                $data['hasil'] = $result;
+                $data['detail'] = $this->Pegawai_m->detail_data('data_riwayat_pangkat','id_riwayat_pangkat',$idr);
+                $data['bagian'] = 'admin/edit-rpangkat-v';
+                $data['rpangkat'] = $this->Pegawai_m->data_rpangkat($id);
+                $data['pangkat'] = $this->Pegawai_m->select_data('master_pangkat');
+                $data['page'] = 'admin/detail-pegawai-v';
+                // pagging setting
+                $this->load->view('admin/dashboard-v',$data);
+            }
+        }else{
+            $pesan = 'Login terlebih dahulu';
+            $this->session->set_flashdata('message', $pesan );
+            redirect(base_url('index.php/login'));
+        }
+    }
+    public function update_rpangkat($idpegawai,$idr){
+        if ($this->ion_auth->logged_in()) {
+            $level = array('admin','members');
+            if (!$this->ion_auth->in_group($level)) {
+                $pesan = 'Anda tidak memiliki Hak untuk Mengakses halaman ini';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/dashboard'));
+            }else{
+                $post = $this->input->post();
+                $datainput = array(
+                    'id_pangkat'=>$post['id_pangkat'],
+                    'status'=>$post['status'],
+                    'nomor_sk'=>$post['nomor_sk'],
+                    'tanggal_sk'=>$post['tanggal_sk_thn'].'-'.$post['tanggal_sk_bln'].'-'.$post['tanggal_sk_hr'],
+                    'tanggal_mulai'=>$post['tanggal_mulai_thn'].'-'.$post['tanggal_mulai_bln'].'-'.$post['tanggal_mulai_hr'],
+                    'tanggal_selesai'=>$post['tanggal_selesai_thn'].'-'.$post['tanggal_selesai_bln'].'-'.$post['tanggal_selesai_hr'],
+                    'masa_kerja' =>$post['masa_kerja'],
+                    'masa_kerja_bulan' =>$post['masa_kerja_bulan'],
+                    'masa_kerja_tahun' =>$post['masa_kerja_tahun']
+                );
+                $this->Pegawai_m->update_data('data_riwayat_pangkat','id_riwayat_pangkat',$idr,$datainput);
+                $pesan = 'Data riwayat pangkat baru berhasil di diubah';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/pegawai/detail_rpangkat/'.$idpegawai));
+            }
+        }else{
+            $pesan = 'Login terlebih dahulu';
+            $this->session->set_flashdata('message', $pesan );
+            redirect(base_url('index.php/login'));
+        }
+    }
     public function edit_rgolongan($id,$idr){
         if ($this->ion_auth->logged_in()) {
             $level = array('admin','members');
@@ -1294,10 +1721,7 @@ class Pegawai extends CI_Controller {
                     'no_hp'=>$post['no_hp'],
                     'email'=>$post['email'],
                     'id_satuan_kerja'=>$post['skpd']
-
-
                 );
-
                 $this->Pegawai_m->update_data('data_pegawai','id_pegawai',$idpegawai,$datainput);
                 $pesan = 'Data riwayat pendidikan baru berhasil di diubah';
                 $this->session->set_flashdata('message', $pesan );
@@ -1884,6 +2308,44 @@ class Pegawai extends CI_Controller {
             redirect(base_url('index.php/admin//login'));
         }
     }
+    public function delete_rpangkat($idpegawai,$idr){
+        if ($this->ion_auth->logged_in()) {
+            $level = array('admin','members');
+            if (!$this->ion_auth->in_group($level)) {
+                $pesan = 'Anda tidak memiliki Hak untuk Mengakses halaman ini';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/dashboard'));
+            }else{
+                $this->Pegawai_m->delete_data('data_riwayat_pangkat','id_riwayat_pangkat',$idr);
+                $pesan = 'Data riwayat pangkat baru berhasil di diubah dihapus';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/pegawai/detail_rpangkat/'.$idpegawai));
+            }
+        }else{
+            $pesan = 'Login terlebih dahulu';
+            $this->session->set_flashdata('message', $pesan );
+            redirect(base_url('index.php/admin//login'));
+        }
+    }
+    public function delete_reselon($idpegawai,$idr){
+        if ($this->ion_auth->logged_in()) {
+            $level = array('admin','members');
+            if (!$this->ion_auth->in_group($level)) {
+                $pesan = 'Anda tidak memiliki Hak untuk Mengakses halaman ini';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/dashboard'));
+            }else{
+                $this->Pegawai_m->delete_data('data_riwayat_eselon','id_riwayat_eselon',$idr);
+                $pesan = 'Data riwayat eselon baru berhasil di diubah dihapus';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/pegawai/detail_reselon/'.$idpegawai));
+            }
+        }else{
+            $pesan = 'Login terlebih dahulu';
+            $this->session->set_flashdata('message', $pesan );
+            redirect(base_url('index.php/admin//login'));
+        }
+    }
 
     public function delete_rgolongan($idpegawai,$idr){
         if ($this->ion_auth->logged_in()) {
@@ -2056,6 +2518,25 @@ class Pegawai extends CI_Controller {
             redirect(base_url('index.php/admin//login'));
         }
     }
+    public function delete_sppd_ld($idpegawai,$idr){
+        if ($this->ion_auth->logged_in()) {
+            $level = array('admin','members');
+            if (!$this->ion_auth->in_group($level)) {
+                $pesan = 'Anda tidak memiliki Hak untuk Mengakses halaman ini';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/dashboard'));
+            }else{
+                $this->Pegawai_m->delete_data('sppd_ld','id_sppd_ld',$idr);
+                $pesan = 'Data riwayat sppd berhasil di diubah dihapus';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/pegawai/daftar_sppd_ld/'.$idpegawai));
+            }
+        }else{
+            $pesan = 'Login terlebih dahulu';
+            $this->session->set_flashdata('message', $pesan );
+            redirect(base_url('index.php/admin//login'));
+        }
+    }
     public function delete_pegawai($id_pegawai){
         if ($this->ion_auth->logged_in()) {
             $level = array('admin','members');
@@ -2122,11 +2603,15 @@ class Pegawai extends CI_Controller {
                 $this->session->set_flashdata('message', $pesan );
                 redirect(base_url('index.php/admin/dashboard'));
             }else{
+                $this->load->model('admin/Sppd_m');
                 $result = $this->Pegawai_m->detail_pegawai($id);
                 $data['infopt'] = $this->Admin_m->info_pt(1);
                 $data['title'] = $result->nama_pegawai;
                 $data['hasil'] = $result;
+                $data['hasil2'] = $this->Admin_m->select_data_order('sppd_ld','id_pegawai',$id);
                 $data['pelatihan'] = $this->Pegawai_m->data_pelatihan($id);
+                $data['dtgolongan'] = $this->Sppd_m->last_golongan($id);
+                $data['dtpangkat'] = $this->Sppd_m->last_pangkat($id);
                 $data['statpeg'] = $this->Admin_m->detail_data_order('master_status_pegawai','id_status_pegawai',$result->id_status_pegawai);
                 $data['agama'] = $this->Admin_m->detail_data_order('master_agama','id_agama',$result->agama);
                 $data['unit_org'] = $this->Admin_m->detail_data_order('master_satuan_kerja','id_satuan_kerja',$result->id_satuan_kerja);
@@ -2150,6 +2635,88 @@ class Pegawai extends CI_Controller {
             redirect(base_url('index.php/login'));
         }
     }
+    public function caripengikut(){
+        $this->load->model('admin/Sppd_m');
+        $post = $this->input->post();
+        $cari = $post['string'];
+        $id_sppd = $post['idsppd'];
+        // echo $post['string'];
+        $hasil = $this->Sppd_m->cari_pengikut($cari);
+        if ($hasil == TRUE) {
+            foreach ($hasil as $data) {
+                echo '<tr><td>'.$data->nama_pegawai.'</td><td>'.$data->nip.'</td><td><a href="'.base_url('index.php/admin/pegawai/create_pengikut_sppd/'.$data->id_pegawai.'/'.$id_sppd).'">Tambahkan</a></td>';
+            }
 
+        }else{
+            echo "Pegawai tidak ditemukan";
+        }
+    }
+     public function create_pengikut_sppd($idpegawai,$idsppd){
+        if ($this->ion_auth->logged_in()) {
+            $level = array('admin','members');
+            if (!$this->ion_auth->in_group($level)) {
+                $pesan = 'Anda tidak memiliki Hak untuk Mengakses halaman ini';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/dashboard'));
+            }else{
+                $post = $this->input->post();
+                $datainput = array('id_pegawai'=>$idpegawai,'id_sppd' => $idsppd);
+                $this->Pegawai_m->insert_data('master_pengikut',$datainput);
+                $pesan = 'Data pengikut baru berhasil di tambahkan';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/pegawai/tambah_pengikut_sppd_ld/'.$idpegawai.'/'.$idsppd));
+            }
+        }else{
+            $pesan = 'Login terlebih dahulu';
+            $this->session->set_flashdata('message', $pesan );
+            redirect(base_url('index.php/login'));
+        }
+    }
+    public function biayaharian(){
+        $post = $this->input->post();
+        $prov = $post['id_provinsi'];
+        $jab = $post['id_jabatan'];
+        $biaya = $this->Pegawai_m->gtdataharian($prov,$jab)->biaya;
+        if ($biaya == TRUE) {
+            echo $biaya;
+        }else{
+            echo "Provinsi atau Jabatan belum di pilih";
+        }
+    }
+    public function biayahotel(){
+        $post = $this->input->post();
+        $prov = $post['id_provinsi'];
+        $jab = $post['id_jabatan'];
+        $biaya = $this->Pegawai_m->gtdatahotel($prov,$jab)->biaya;
+        if ($biaya == TRUE) {
+            echo $biaya;
+        }else{
+            echo "Provinsi atau Jabatan belum di pilih";
+        }
+    }
+    public function ttlbiayaharian(){
+        $post = $this->input->post();
+        $prov = $post['id_provinsi'];
+        $jab = $post['id_jabatan'];
+        $lh = $post['lama_hari'];
+        $biaya = $this->Pegawai_m->gtdatahotel($prov,$jab)->biaya;
+        if ($biaya == TRUE) {
+            echo $biaya*$lh;
+        }else{
+            echo "Beberapa data belum diisi";
+        }
+    }
+    public function ttlbiayahotel(){
+        $post = $this->input->post();
+        $prov = $post['id_provinsi'];
+        $jab = $post['id_jabatan'];
+        $lh = $post['lama_hari'];
+        $biaya = $this->Pegawai_m->gtdatahotel($prov,$jab)->biaya;
+        if ($biaya == TRUE) {
+            echo $biaya*$lh;
+        }else{
+            echo "Beberapa data belum diisi";
+        }
+    }
 }
 ?>

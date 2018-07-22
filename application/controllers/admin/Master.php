@@ -6,6 +6,7 @@ class Master extends CI_Controller {
         parent::__construct();
         $this->load->model('admin/Admin_m');
         $this->load->model('admin/Master_m');
+        $this->load->model('admin/Pegawai_m');
     }
     public function index(){
         if ($this->ion_auth->logged_in()) {
@@ -48,6 +49,8 @@ class Master extends CI_Controller {
                 $data['users'] = $this->ion_auth->user()->row();
                 $data['aside'] = 'nav/nav';
                 $data['hasil'] = $this->Master_m->detail_data('master_'.$table,'id_'.$table,$id);
+                $data['jabatan'] = $this->Pegawai_m->select_data('master_jabatan');
+                $data['provinsi'] = $this->Pegawai_m->select_data('master_provinsi');
                 $data['page'] = 'admin/e_'.$table.'_v';
                 // pagging setting
                 $this->load->view('admin/dashboard-v',$data);
@@ -324,6 +327,114 @@ class Master extends CI_Controller {
                 $data['hasil'] = $this->Master_m->select_data('master_lokasi_pelatihan');
                 $data['aside'] = 'nav/nav';
                 $data['page'] = 'admin/m-lokasi-pelatihan-v';
+                // pagging setting
+                $this->load->view('admin/dashboard-v',$data);
+            }
+        }else{
+            $pesan = 'Login terlebih dahulu';
+            $this->session->set_flashdata('message', $pesan );
+            redirect(base_url('index.php/login'));
+        }
+    }
+    public function biaya_harian(){
+        if ($this->ion_auth->logged_in()) {
+            $level = array('admin','members');
+            if (!$this->ion_auth->in_group($level)) {
+                $pesan = 'Anda tidak memiliki Hak untuk Mengakses halaman ini';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/dashboard'));
+            }else{
+                $post = $this->input->get();
+                $data['title'] = 'Master Uang Harian';
+                $data['infopt'] = $this->Admin_m->info_pt(1);
+                $data['brand'] = 'asset/img/lembaga/'.$this->Admin_m->info_pt(1)->logo_pt;
+                $data['users'] = $this->ion_auth->user()->row();
+                $data['hasil'] = $this->Master_m->select_data('master_biaya_harian');
+                $data['provinsi'] = $this->Pegawai_m->select_data('master_provinsi');
+                $data['jabatan'] = $this->Pegawai_m->select_data('master_jabatan');
+                $data['aside'] = 'nav/nav';
+                $data['page'] = 'admin/m-biaya-harian-v';
+                // pagging setting
+                $this->load->view('admin/dashboard-v',$data);
+            }
+        }else{
+            $pesan = 'Login terlebih dahulu';
+            $this->session->set_flashdata('message', $pesan );
+            redirect(base_url('index.php/login'));
+        }
+    }
+    public function edit_biaya_harian($id){
+        if ($this->ion_auth->logged_in()) {
+            $level = array('admin','members');
+            if (!$this->ion_auth->in_group($level)) {
+                $pesan = 'Anda tidak memiliki Hak untuk Mengakses halaman ini';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/dashboard'));
+            }else{
+                $post = $this->input->get();
+                $data['title'] = 'Master Uang Harian';
+                $data['infopt'] = $this->Admin_m->info_pt(1);
+                $data['brand'] = 'asset/img/lembaga/'.$this->Admin_m->info_pt(1)->logo_pt;
+                $data['users'] = $this->ion_auth->user()->row();
+                $data['hasil'] = $this->Admin_m->detail_data_order('master_biaya_harian','id_biaya_harian',$id);
+                $data['provinsi'] = $this->Pegawai_m->select_data('master_provinsi');
+                $data['jabatan'] = $this->Pegawai_m->select_data('master_jabatan');
+                $data['aside'] = 'nav/nav';
+                $data['page'] = 'admin/e_biaya_harian_v';
+                // pagging setting
+                $this->load->view('admin/dashboard-v',$data);
+            }
+        }else{
+            $pesan = 'Login terlebih dahulu';
+            $this->session->set_flashdata('message', $pesan );
+            redirect(base_url('index.php/login'));
+        }
+    }
+    public function edit_biaya_hotel($id){
+        if ($this->ion_auth->logged_in()) {
+            $level = array('admin','members');
+            if (!$this->ion_auth->in_group($level)) {
+                $pesan = 'Anda tidak memiliki Hak untuk Mengakses halaman ini';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/dashboard'));
+            }else{
+                $post = $this->input->get();
+                $data['title'] = 'Master Uang Harian';
+                $data['infopt'] = $this->Admin_m->info_pt(1);
+                $data['brand'] = 'asset/img/lembaga/'.$this->Admin_m->info_pt(1)->logo_pt;
+                $data['users'] = $this->ion_auth->user()->row();
+                $data['hasil'] = $this->Admin_m->detail_data_order('master_biaya_hotel','id_biaya_hotel',$id);
+                $data['provinsi'] = $this->Pegawai_m->select_data('master_provinsi');
+                $data['jabatan'] = $this->Pegawai_m->select_data('master_jabatan');
+                $data['aside'] = 'nav/nav';
+                $data['page'] = 'admin/e_biaya_hotel_v';
+                // pagging setting
+                $this->load->view('admin/dashboard-v',$data);
+            }
+        }else{
+            $pesan = 'Login terlebih dahulu';
+            $this->session->set_flashdata('message', $pesan );
+            redirect(base_url('index.php/login'));
+        }
+    }
+    public function biaya_hotel(){
+        if ($this->ion_auth->logged_in()) {
+            $level = array('admin','members');
+            if (!$this->ion_auth->in_group($level)) {
+                $pesan = 'Anda tidak memiliki Hak untuk Mengakses halaman ini';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/dashboard'));
+            }else{
+                $post = $this->input->get();
+                $data['title'] = 'Master Uang Hotel';
+                $data['infopt'] = $this->Admin_m->info_pt(1);
+                $data['brand'] = 'asset/img/lembaga/'.$this->Admin_m->info_pt(1)->logo_pt;
+                $data['users'] = $this->ion_auth->user()->row();
+                $data['hasil'] = $this->Master_m->select_data('master_biaya_hotel');
+                $data['provinsi'] = $this->Pegawai_m->select_data('master_provinsi');
+                $data['jabatan'] = $this->Pegawai_m->select_data('master_jabatan');
+                $data['aside'] = 'nav/nav';
+                $data['page'] = 'admin/m-biaya-hotel-v';
                 // pagging setting
                 $this->load->view('admin/dashboard-v',$data);
             }
@@ -615,6 +726,56 @@ class Master extends CI_Controller {
             redirect(base_url('index.php/login'));
         }
     }
+    public function create_master_biaya_harian(){
+        if ($this->ion_auth->logged_in()) {
+            $level = array('admin','members');
+            if (!$this->ion_auth->in_group($level)) {
+                $pesan = 'Anda tidak memiliki Hak untuk Mengakses halaman ini';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/dashboard'));
+            }else{
+                $post = $this->input->post();
+                $datainput = array(
+                    'id_provinsi' => $post['id_provinsi'],
+                    'id_jabatan' => $post['id_jabatan'],
+                    'biaya' => $post['biaya']
+                );
+                $this->Master_m->insert_data('master_biaya_harian',$datainput);
+                $pesan = 'Data Master Biaya Harian berhasil di tambahkan';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/master/biaya_harian'));
+            }
+        }else{
+            $pesan = 'Login terlebih dahulu';
+            $this->session->set_flashdata('message', $pesan );
+            redirect(base_url('index.php/login'));
+        }
+    }
+    public function create_master_biaya_hotel(){
+        if ($this->ion_auth->logged_in()) {
+            $level = array('admin','members');
+            if (!$this->ion_auth->in_group($level)) {
+                $pesan = 'Anda tidak memiliki Hak untuk Mengakses halaman ini';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/dashboard'));
+            }else{
+                $post = $this->input->post();
+                $datainput = array(
+                    'id_provinsi' => $post['id_provinsi'],
+                    'id_jabatan' => $post['id_jabatan'],
+                    'biaya' => $post['biaya']
+                );
+                $this->Master_m->insert_data('master_biaya_hotel',$datainput);
+                $pesan = 'Data Master Biaya hotel berhasil di tambahkan';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/master/biaya_hotel'));
+            }
+        }else{
+            $pesan = 'Login terlebih dahulu';
+            $this->session->set_flashdata('message', $pesan );
+            redirect(base_url('index.php/login'));
+        }
+    }
     public function update_status_pegawai($id){
         if ($this->ion_auth->logged_in()) {
             $level = array('admin','members');
@@ -891,6 +1052,56 @@ class Master extends CI_Controller {
                 $pesan = 'Data Lokasi Kerja baru berhasil di diubah';
                 $this->session->set_flashdata('message', $pesan );
                 redirect(base_url('index.php/admin/master/lokasi_kerja'));
+            }
+        }else{
+            $pesan = 'Login terlebih dahulu';
+            $this->session->set_flashdata('message', $pesan );
+            redirect(base_url('index.php/login'));
+        }
+    }
+    public function update_biaya_harian($id){
+        if ($this->ion_auth->logged_in()) {
+            $level = array('admin','members');
+            if (!$this->ion_auth->in_group($level)) {
+                $pesan = 'Anda tidak memiliki Hak untuk Mengakses halaman ini';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/dashboard'));
+            }else{
+                $post = $this->input->post();
+                $datainput = array(
+                   'id_provinsi' => $post['id_provinsi'],
+                    'id_jabatan' => $post['id_jabatan'],
+                    'biaya' => $post['biaya']
+                );
+                $this->Master_m->update_data('master_biaya_harian','id_biaya_harian',$id,$datainput);
+                $pesan = 'Data Biaya Harian baru berhasil di diubah';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/master/biaya_harian'));
+            }
+        }else{
+            $pesan = 'Login terlebih dahulu';
+            $this->session->set_flashdata('message', $pesan );
+            redirect(base_url('index.php/login'));
+        }
+    }
+    public function update_biaya_hotel($id){
+        if ($this->ion_auth->logged_in()) {
+            $level = array('admin','members');
+            if (!$this->ion_auth->in_group($level)) {
+                $pesan = 'Anda tidak memiliki Hak untuk Mengakses halaman ini';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/dashboard'));
+            }else{
+                $post = $this->input->post();
+                $datainput = array(
+                   'id_provinsi' => $post['id_provinsi'],
+                    'id_jabatan' => $post['id_jabatan'],
+                    'biaya' => $post['biaya']
+                );
+                $this->Master_m->update_data('master_biaya_hotel','id_biaya_hotel',$id,$datainput);
+                $pesan = 'Data Biaya Hotel baru berhasil di diubah';
+                $this->session->set_flashdata('message', $pesan );
+                redirect(base_url('index.php/admin/master/biaya_hotel'));
             }
         }else{
             $pesan = 'Login terlebih dahulu';

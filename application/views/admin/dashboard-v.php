@@ -45,7 +45,7 @@ rel="stylesheet">
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item dropdown">
-                <a class="btn btn-info dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">   
+                <a class="btn btn-secondary dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">   
                   <i class="material-icons">library_books</i> Master
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -56,8 +56,8 @@ rel="stylesheet">
                   <a class="dropdown-item" href="<?php echo base_url('index.php/admin/master/eselon') ?>"><i class="material-icons">autorenew</i>Eselon</a>
                   <!-- <a class="dropdown-item" href="<?php echo base_url('index.php/admin/master/pelatihan') ?>"><i class="material-icons">assignment</i>Pelatihan</a> -->
                   <a class="dropdown-item" href="<?php echo base_url('index.php/admin/master/jabatan') ?>"><i class="material-icons">work</i>Jabatan</a>
-                  <a class="dropdown-item" href="<?php echo base_url('index.php/admin/master/uang_harian') ?>"><i class="material-icons">payment</i>Uang Harian</a>
-                  <a class="dropdown-item" href="<?php echo base_url('index.php/admin/master/uang_hotel') ?>"><i class="material-icons">payment</i>Uang Hotel</a>
+                  <a class="dropdown-item" href="<?php echo base_url('index.php/admin/master/biaya_harian') ?>"><i class="material-icons">payment</i>Biaya Harian</a>
+                  <a class="dropdown-item" href="<?php echo base_url('index.php/admin/master/biaya_hotel') ?>"><i class="material-icons">payment</i>Uang Hotel</a>
                   <!-- <a class="dropdown-item" href="<?php echo base_url('index.php/admin/master/status_jabatan') ?>"><i class="material-icons">playlist_add_check</i>Jenis KP</a>
                   <a class="dropdown-item" href="<?php echo base_url('index.php/admin/master/penghargaan') ?>"><i class="material-icons">stars</i>Penghargaan</a>
                   <a class="dropdown-item" href="<?php echo base_url('index.php/admin/master/hukuman') ?>"><i class="material-icons">select_all</i>Hukuman</a>
@@ -66,7 +66,7 @@ rel="stylesheet">
                 </div>
               </li>
               <li class="nav-item dropdown" style="margin-left: 7px">
-                <a class="btn btn-info dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="btn btn-secondary dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="material-icons">report</i> Laporan
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">

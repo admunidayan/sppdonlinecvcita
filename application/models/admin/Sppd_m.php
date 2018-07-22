@@ -57,10 +57,23 @@ class Sppd_m extends CI_Model
 		$query = $this->db->get($tabel);
 		return $query->result();
 	}
+	public function cari_pengikut($string){
+		$this->db->like('nama_pegawai', $string);
+		$this->db->or_like('nip', $string);
+		$this->db->limit('3');
+		$query = $this->db->get('data_pegawai');
+		return $query->result();
+	}
 	public function detail_data($tabel,$field,$id){
 		$this->db->where($field, $id);
 		$query = $this->db->get($tabel);
-		return $query->row();
+		return $query->result();
+	}
+	public function data_pengikut($id){
+		$this->db->join('data_pegawai', 'data_pegawai.id_pegawai = master_pengikut.id_pegawai');
+		$this->db->where('master_pengikut.id_sppd', $id);
+		$query = $this->db->get('master_pengikut');
+		return $query->result();
 	}
 	public function biaya_harian($prov,$jab){
 		$this->db->where('id_provinsi', $prov);
@@ -104,6 +117,13 @@ class Sppd_m extends CI_Model
 	public function last_jabatan($id){
 		$this->db->where('id_pegawai',$id);
 		$this->db->join('master_jabatan', 'master_jabatan.id_jabatan = data_riwayat_jabatan.id_jabatan');
+		$this->db->order_by('id_riwayat_jabatan','desc');
+		$query = $this->db->get('data_riwayat_jabatan');
+		return $query->row();
+	}
+	public function last_satuan_kerja($id){
+		$this->db->where('id_pegawai',$id);
+		$this->db->join('master_satuan_kerja', 'master_satuan_kerja.id_satuan_kerja = data_riwayat_jabatan.id_satuan_kerja');
 		$this->db->order_by('id_riwayat_jabatan','desc');
 		$query = $this->db->get('data_riwayat_jabatan');
 		return $query->row();

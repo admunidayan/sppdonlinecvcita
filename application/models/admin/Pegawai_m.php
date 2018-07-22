@@ -131,4 +131,16 @@ class Pegawai_m extends CI_Model
 		$this->db->where($field, $id);
 		$this->db->update($tabel,$data);
 	}
+	public function gtdataharian($prov,$jab){
+		$this->db->where('id_provinsi', $prov);
+		$this->db->where('id_jabatan', $jab);
+		$query = $this->db->get('master_biaya_harian');
+		return $query->row();
+	}
+	public function gtdatahotel($prov,$jab){
+		$this->db->where('id_provinsi', $prov);
+		$this->db->where('id_jabatan', $jab);
+		$query = $this->db->get('master_biaya_hotel');
+		return $query->row();
+	}
 }
